@@ -125,10 +125,19 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 10px;
   }
   nav a {
     display: block;
-    margin: 5px 0;
+    width: 100%;
+    padding: 12px;
+    background: #15803d;
+    border-radius: 8px;
+    margin: 0;
+    font-size: 16px;
+  }
+  nav a:hover {
+    background: #166534;
   }
   /* MAPA */
   #map {
