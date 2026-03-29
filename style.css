@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0fdf4;
+}
+/* HEADER */
+header {
+  background: #16a34a;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+nav a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+/* EFEITO NAVBAR */
+nav a:hover {
+  text-decoration: underline;
+}
+/* SEÇÕES */
+section {
+  padding: 30px;
+  text-align: center;
+}
+/* TÍTULOS */
+h2 {
+  margin-bottom: 20px;
+}
+/* BOTÕES */
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #16a34a;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button:hover {
+  background: #15803d;
+}
+/* LISTA */
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin: 5px 0;
+}
+/* MAPA */
+#map {
+  width: 80%;
+  height: 400px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+/* CARDS */
+#tipos {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+/* TÍTULO OCUPA LINHA TODA */
+#tipos h2 {
+  grid-column: span 2;
+}
+/* CARD */
+.card {
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+/* CORES SUAVES */
+.papel {
+  background: #dbeafe;
+  border-left: 5px solid #2563eb;
+}
+.plastico {
+  background: #fee2e2;
+  border-left: 5px solid #dc2626;
+}
+.vidro {
+  background: #dcfce7;
+  border-left: 5px solid #16a34a;
+}
+.metal {
+  background: #fef9c3;
+  border-left: 5px solid #eab308;
+}
+.organico {
+  background: #fef3c7;
+  border-left: 5px solid #a16207;
+}
+.eletronico {
+  background: #e5e7eb;
+  border-left: 5px solid #6b7280;
+}
+/* ANIMAÇÃO DOS CARDS */
+.card {
+  transition: all 0.2s ease;
+}
+/* EFEITO HOVER */
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  cursor: pointer;
+  border-left-width: 11px;
+}
+/* FOOTER */
+footer {
+  background: #16a34a;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  /* MENU */
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+  /* MAPA */
+  #map {
+    width: 95%;
+    height: 300px;
+  }
+  /* CARDS (1 por linha) */
+  #tipos {
+    grid-template-columns: 1fr;
+  }
+  #tipos h2 {
+    grid-column: span 1;
+  }
+  .card {
+    padding: 12px;
+  }
+  /* TEXTO */
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
