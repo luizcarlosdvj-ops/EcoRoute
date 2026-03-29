@@ -1,20 +1,28 @@
-body {
+/* RESET E CORREÇÃO DE LARGURA */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Essencial para o layout não quebrar no mobile */
+}
+body {
   font-family: Arial, sans-serif;
   background: #f0fdf4;
+  overflow-x: hidden; /* Garante que não apareça barra de rolagem horizontal */
 }
 /* HEADER */
 header {
   background: #16a34a;
   color: white;
-  padding: 15px;
+  padding: 20px 0; /* Padding vertical apenas */
   text-align: center;
+  width: 100%;
 }
 /* NAV DESKTOP */
 nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 nav a {
   margin: 0 10px;
@@ -70,7 +78,7 @@ li {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-/* TÍTULO VAi OCUPA LINHA TODA */
+/* TÍTULO VAI OCUPA LINHA TODA */
 #tipos h2 {
   grid-column: span 2;
 }
@@ -82,31 +90,13 @@ li {
   text-align: center;
   transition: all 0.2s ease;
 }
-/* CORES*/
-.papel {
-  background: #dbeafe;
-  border-left: 5px solid #2563eb;
-}
-.plastico {
-  background: #fee2e2;
-  border-left: 5px solid #dc2626;
-}
-.vidro {
-  background: #dcfce7;
-  border-left: 5px solid #16a34a;
-}
-.metal {
-  background: #fef9c3;
-  border-left: 5px solid #eab308;
-}
-.organico {
-  background: #fef3c7;
-  border-left: 5px solid #a16207;
-}
-.eletronico {
-  background: #e5e7eb;
-  border-left: 5px solid #6b7280;
-}
+/* CORES */
+.papel { background: #dbeafe; border-left: 5px solid #2563eb; }
+.plastico { background: #fee2e2; border-left: 5px solid #dc2626; }
+.vidro { background: #dcfce7; border-left: 5px solid #16a34a; }
+.metal { background: #fef9c3; border-left: 5px solid #eab308; }
+.organico { background: #fef3c7; border-left: 5px solid #a16207; }
+.eletronico { background: #e5e7eb; border-left: 5px solid #6b7280; }
 /* EFEITO HOVER */
 .card:hover {
   transform: translateY(-8px) scale(1.03);
@@ -119,7 +109,7 @@ footer {
   background: #16a34a;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
 }
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
@@ -127,11 +117,12 @@ footer {
   nav {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 15px;
+    padding: 0 20px; /* O espaçamento lateral agora fica aqui dentro */
   }
   nav a {
-    width: 100%;
+    display: block; /* Ocupa a largura disponível no nav */
     padding: 14px;
     background: #15803d;
     border-radius: 10px;
@@ -144,12 +135,13 @@ footer {
   }
   /* MAPA */
   #map {
-    width: 95%;
+    width: 90%;
     height: 300px;
   }
   /* CARDS */
   #tipos {
     grid-template-columns: 1fr;
+    padding: 0 20px;
   }
   #tipos h2 {
     grid-column: span 1;
@@ -158,13 +150,7 @@ footer {
     padding: 12px;
   }
   /* TEXTO */
-  h1 {
-    font-size: 22px;
-  }
-  h2 {
-    font-size: 18px;
-  }
-  p {
-    font-size: 14px;
-  }
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+  p { font-size: 14px; }
 }
