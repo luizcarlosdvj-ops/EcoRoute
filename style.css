@@ -10,6 +10,12 @@ header {
   padding: 15px;
   text-align: center;
 }
+/* NAV DESKTOP */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 nav a {
   margin: 0 10px;
   color: white;
@@ -64,7 +70,7 @@ li {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-/* TÍTULO OCUPA LINHA TODA */
+/* TÍTULO VAi OCUPA LINHA TODA */
 #tipos h2 {
   grid-column: span 2;
 }
@@ -74,8 +80,9 @@ li {
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-align: center;
+  transition: all 0.2s ease;
 }
-/* CORES SUAVES */
+/* CORES*/
 .papel {
   background: #dbeafe;
   border-left: 5px solid #2563eb;
@@ -100,10 +107,6 @@ li {
   background: #e5e7eb;
   border-left: 5px solid #6b7280;
 }
-/* ANIMAÇÃO DOS CARDS */
-.card {
-  transition: all 0.2s ease;
-}
 /* EFEITO HOVER */
 .card:hover {
   transform: translateY(-8px) scale(1.03);
@@ -120,21 +123,21 @@ footer {
 }
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  /* MENU */
+  /* MENU MOBILE */
   nav {
-    display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: stretch;
+    gap: 12px;
     margin-top: 10px;
   }
   nav a {
-    display: block;
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     background: #15803d;
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 0;
     font-size: 16px;
+    text-align: center;
   }
   nav a:hover {
     background: #166534;
@@ -144,7 +147,7 @@ footer {
     width: 95%;
     height: 300px;
   }
-  /* CARDS (1 por linha) */
+  /* CARDS */
   #tipos {
     grid-template-columns: 1fr;
   }
