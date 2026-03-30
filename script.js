@@ -4,7 +4,7 @@ const map = L.map('map').setView([-23.026, -45.555], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
-// ÍCONES
+// ÍCONES DOS MARCADORES COR SEPARADA (NORMAL, SELECIONADO E USUÁRIO)
 const normalIcon = L.icon({
   iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
   iconSize: [32, 32],
@@ -67,11 +67,11 @@ pontos.forEach(ponto => {
       Ponto de entrega voluntária de lixo reciclável
     `);
   marker.on('click', () => {
-    // volta o anterior
+    // volta a cor anterior do marcador selecionado
     if (marcadorSelecionado) {
       marcadorSelecionado.setIcon(normalIcon);
     }
-    // marca o atual
+    // marca o atual como selecionado
     marker.setIcon(selectedIcon);
     marcadorSelecionado = marker;
   });
@@ -87,7 +87,7 @@ if (navigator.geolocation) {
     map.setView(userCoords, 14);
   });
 }
-// TOGGLE DOS PEV
+// ATIVAR/DESATIVAR DOS PEV
 function toggle(element) {
   const pev = element.parentElement;
   pev.classList.toggle("active");
