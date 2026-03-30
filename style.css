@@ -2,18 +2,18 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Essencial para o layout não quebrar no mobile */
+  box-sizing: border-box;
 }
 body {
   font-family: Arial, sans-serif;
   background: #f0fdf4;
-  overflow-x: hidden; /* Garante que não apareça barra de rolagem horizontal */
+  overflow-x: hidden;
 }
 /* HEADER */
 header {
   background: #16a34a;
   color: white;
-  padding: 20px 0; /* Padding vertical apenas */
+  padding: 25px 0; /* AUMENTEI */
   text-align: center;
   width: 100%;
 }
@@ -23,15 +23,20 @@ nav {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
+  gap: 15px; /* ESPAÇAMENTO ENTRE BOTÕES */
+  margin-top: 10px;
 }
 nav a {
-  margin: 0 10px;
+  padding: 10px 15px; /* BOTÃO MAIOR */
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
   color: white;
   text-decoration: none;
+  transition: 0.2s;
 }
 /* EFEITO NAVBAR */
 nav a:hover {
-  text-decoration: underline;
+  background: #15803d;
 }
 /* SEÇÕES */
 section {
@@ -97,6 +102,12 @@ li {
 .metal { background: #fef9c3; border-left: 5px solid #eab308; }
 .organico { background: #fef3c7; border-left: 5px solid #a16207; }
 .eletronico { background: #e5e7eb; border-left: 5px solid #6b7280; }
+.medicamento { background: #f3e8ff; border-left: 5px solid #9333ea; }
+.pilhas { background: #fff7ed; border-left: 5px solid #ea580c; }
+.oleo { background: #fff7ed; border-left: 5px solid #f97316; }
+.lampada { background: #fef3c7; border-left: 5px solid #f59e0b; }
+.moveis { background: #ede9fe; border-left: 5px solid #7c3aed; }
+.entulho { background: #e7e5e4; border-left: 5px solid #78716c; }
 /* EFEITO HOVER */
 .card:hover {
   transform: translateY(-8px) scale(1.03);
@@ -113,16 +124,17 @@ footer {
 }
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  /* MENU MOBILE */
+  /* MENU MOBILE MELHORADO */
   nav {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 12px;
     margin-top: 15px;
-    padding: 0 20px; /* O espaçamento lateral agora fica aqui dentro */
+    padding: 0 20px;
   }
   nav a {
-    display: block; /* Ocupa a largura disponível no nav */
+    display: block;
+    width: 100%;
     padding: 14px;
     background: #15803d;
     border-radius: 10px;
@@ -177,4 +189,62 @@ footer {
 }
 .pev.active .pev-info {
   display: block;
+}
+/* ANIMAÇÃO SUAVE */
+.pev-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+/* QUANDO ABRE */
+.pev.active .pev-info {
+  max-height: 200px;
+}
+/* SETA */
+.pev-header span:last-child {
+  transition: transform 0.3s ease;
+}
+/* GIRAR SETA */
+.pev.active .pev-header span:last-child {
+  transform: rotate(180deg);
+}
+/* BOTÃO IR NO MAPA */
+.ir-mapa {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ir-mapa:hover {
+  background: #15803d;
+}
+/* INPUT FILTRO */
+#filtro {
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+/* EMPRESAS */
+#empresas {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.empresa {
+  background: #ffffff;
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.2s;
+}
+.empresa:hover {
+  transform: scale(1.03);
 }
