@@ -4,6 +4,23 @@ const map = L.map('map').setView([-23.026, -45.555], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
+// ÍCONES
+const normalIcon = L.icon({
+  iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32]
+});
+const selectedIcon = L.icon({
+  iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32]
+});
+const userIcon = L.icon({
+  iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32]
+});
 // PONTOS DE COLETA
 const pontos = [
   {
@@ -39,21 +56,31 @@ const pontos = [
     coords: [-23.010131076369166, -45.593815713260426]
   }
 ];
-// adicionar marcadores (CORRIGIDO - sem duplicar)
+// CONTROLE DE MARCADOR SELECIONADO
+let marcadorSelecionado = null;
+// ADICIONAR MARCADORES
 pontos.forEach(ponto => {
-  L.marker(ponto.coords)
+  const marker = L.marker(ponto.coords, { icon: normalIcon })
     .addTo(map)
     .bindPopup(`
       <b>${ponto.nome}</b><br>
-      ♻️ Ponto de entrega voluntária
+      Ponto de entrega voluntária de lixo reciclável
     `);
+  marker.on('click', () => {
+    // volta o anterior
+    if (marcadorSelecionado) {
+      marcadorSelecionado.setIcon(normalIcon);
+    }
+    // marca o atual
+    marker.setIcon(selectedIcon);
+    marcadorSelecionado = marker;
+  });
 });
-
 // LOCALIZAÇÃO DO USUÁRIO
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(pos => {
     const userCoords = [pos.coords.latitude, pos.coords.longitude];
-    L.marker(userCoords)
+    L.marker(userCoords, { icon: userIcon })
       .addTo(map)
       .bindPopup("Você está aqui")
       .openPopup();
@@ -65,3 +92,20 @@ function toggle(element) {
   const pev = element.parentElement;
   pev.classList.toggle("active");
 }
+// IR PARA MAPA
+function irParaMapa(coords) {
+  map.setView(coords, 16);
+}
+// FILTRO
+document.getElementById("filtro").addEventListener("input", function () {
+  const valor = this.value.toLowerCase();
+  const pevs = document.querySelectorAll(".pev");
+  pevs.forEach(pev => {
+    const texto = pev.innerText.toLowerCase();
+    if (texto.includes(valor)) {
+      pev.style.display = "block";
+    } else {
+      pev.style.display = "none";
+    }
+  });
+});
