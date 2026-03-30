@@ -9,11 +9,17 @@ body {
   background: #f0fdf4;
   overflow-x: hidden;
 }
+/* CONTAINER*/
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
 /* HEADER */
 header {
   background: #16a34a;
   color: white;
-  padding: 25px 0; /* AUMENTEI */
+  padding: 25px 0;
   text-align: center;
   width: 100%;
 }
@@ -23,11 +29,11 @@ nav {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  gap: 15px; /* ESPAÇAMENTO ENTRE BOTÕES */
+  gap: 15px;
   margin-top: 10px;
 }
 nav a {
-  padding: 10px 15px; /* BOTÃO MAIOR */
+  padding: 10px 15px;
   background: rgba(255,255,255,0.1);
   border-radius: 8px;
   color: white;
@@ -38,12 +44,17 @@ nav a {
 nav a:hover {
   background: #15803d;
 }
-/* SEÇÕES */
+/*SEÇÕES*/
 section {
   padding: 30px;
   text-align: center;
+
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-/* TÍTULOS */
+/* TÍTULOS DAS SEÇÕES */
 h2 {
   margin-bottom: 20px;
 }
@@ -77,7 +88,7 @@ li {
 }
 /* CARDS */
 #tipos {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -124,7 +135,6 @@ footer {
 }
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  /* MENU MOBILE MELHORADO */
   nav {
     flex-direction: column;
     align-items: stretch;
@@ -145,12 +155,10 @@ footer {
   nav a:hover {
     background: #166534;
   }
-  /* MAPA */
   #map {
     width: 90%;
     height: 300px;
   }
-  /* CARDS */
   #tipos {
     grid-template-columns: 1fr;
     padding: 0 20px;
@@ -161,12 +169,11 @@ footer {
   .card {
     padding: 12px;
   }
-  /* TEXTO */
   h1 { font-size: 22px; }
   h2 { font-size: 18px; }
   p { font-size: 14px; }
 }
-/* PEV EXPANSÍVEL */
+/* PEV TER ANIMAÇÃO EXPANSÍVEL */
 .pev {
   background: #ffffff;
   margin: 10px auto;
@@ -190,7 +197,7 @@ footer {
 .pev.active .pev-info {
   display: block;
 }
-/* ANIMAÇÃO SUAVE */
+/* ANIMAÇÃOZINHA SUAVE */
 .pev-info {
   max-height: 0;
   overflow: hidden;
@@ -200,11 +207,11 @@ footer {
 .pev.active .pev-info {
   max-height: 200px;
 }
-/* SETA */
+/* SETINA */
 .pev-header span:last-child {
   transition: transform 0.3s ease;
 }
-/* GIRAR SETA */
+/* GIRAR A SETINHA */
 .pev.active .pev-header span:last-child {
   transform: rotate(180deg);
 }
@@ -221,7 +228,7 @@ footer {
 .ir-mapa:hover {
   background: #15803d;
 }
-/* INPUT FILTRO */
+/* INPUT DO FILTRO */
 #filtro {
   padding: 10px;
   width: 80%;
@@ -233,7 +240,7 @@ footer {
 }
 /* EMPRESAS */
 #empresas {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .empresa {
