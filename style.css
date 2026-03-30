@@ -154,3 +154,27 @@ footer {
   h2 { font-size: 18px; }
   p { font-size: 14px; }
 }
+/* PEV EXPANSÍVEL */
+.pev {
+  background: #ffffff;
+  margin: 10px auto;
+  border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.pev-header {
+  padding: 15px;
+  background: #16a34a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.pev-info {
+  display: none;
+  padding: 15px;
+}
+.pev.active .pev-info {
+  display: block;
+}
