@@ -13,6 +13,7 @@
   <nav>
     <a href="#sobre">Sobre</a>
     <a href="#coleta">Pontos de Coleta</a>
+    <a href="#empresas">Locais de Reciclagem</a>
     <a href="#mapa">Mapa</a>
     <a href="#tipos">Tipos de Lixo</a>
   </nav>
@@ -22,69 +23,116 @@
   <p>Lixo lixo lixo</p>
 </section>
 <section id="coleta">
-  <h2>Pontos de Coleta</h2>
+  <h2>Pontos de Coleta em Taubaté</h2>
+  <!-- FILTRO -->
+  <input type="text" id="filtro" placeholder="Filtrar por tipo de lixo...">
+  <!-- PEV Imaculada -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Imaculada</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Papel, Plástico, Vidro</p>
+      <p> Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.047449023860835, -45.545293672440415])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV Cecap -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Cecap</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Papel, Metal</p>
+      <p>Papel, Metal, Plástico, Entulho, Móveis </p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.038419303363188, -45.61880788931474])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV Piratininga -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque Piratininga</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Plástico, Vidro</p>
+      <p>Plástico, Vidro, Entulho, Móveis </p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.010131076369166, -45.593815713260426])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV Três Marias -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque Três Marias II</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Papel, Orgânico</p>
+      <p> Papel, Orgânico, Resíduos verdes</p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.031388956010513, -45.53782141016309])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV Centro -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Centro</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Todos os tipos</p>
+      <p> Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas </p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.028803162170558, -45.55452414441141])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV Itaim -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Itaim</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Plástico, Metal</p>
+      <p> Plástico, Metal, Entulho </p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-23.02017202574099, -45.52601969038315])">Ver no mapa</button>
     </div>
   </div>
+  <!-- PEV São Luiz -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque São Luiz</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>♻️ Vidro, Papel</p>
+      <p> Vidro, Papel, Móveis
+      </p>
+      <p>🕒 Segunda a sábado: 8h às 17h</p>
+      <button class="ir-mapa" onclick="irParaMapa([-22.99772208852909, -45.560003250506306])">Ver no mapa</button>
     </div>
+  </div>
+</section>
+<section id="empresas">
+  <h2>Locais de Reciclagem em Taubaté</h2>
+  <div class="empresa">
+    <h3>Pro Ecologic Reciclagem</h3>
+    <p>📍 Rua Eduardo Nozelli, 130 - Independência</p>
+    <p>Aceita: Isopor, plásticos, metais</p>
+  </div>
+  <div class="empresa">
+    <h3>Nair Reciclagem</h3>
+    <p>📍 Av. Dom Pedro I, 1723 - Parque Três Marias</p>
+    <p>Aceita: metais, papelão, plástico, baterias, óleo</p>
+  </div>
+  <div class="empresa">
+    <h3>Green Eletron</h3>
+    <p>📍 Pontos em lojas (Casas Bahia, Senac, Leroy Merlin)</p>
+    <p>Aceita: eletrônicos e pilhas</p>
+  </div>
+  <div class="empresa">
+    <h3>Troca Verde</h3>
+    <p>📍 Projeto da prefeitura</p>
+    <p>Troca recicláveis por alimentos</p>
   </div>
 </section>
 <section id="mapa">
@@ -97,10 +145,10 @@
     <h3>Papel</h3>
     <p>Lixo</p>
   </div>
-  <dIv class="card plastico">
+  <div class="card plastico">
     <h3>Plástico</h3>
     <p>Lixo</p>
-  </dIv>
+  </div>
   <div class="card vidro">
     <h3>Vidro</h3>
     <p>Lixo</p>
@@ -117,7 +165,32 @@
     <h3>Eletrônicos</h3>
     <p>Lixo</p>
   </div>
+  <div class="card medicamento">
+  <h3>Medicamentos</h3>
+  <p>Lixo</p>
+  </div>
+  <div class="card pilhas">
+  <h3>Pilhas e Baterias</h3>
+  <p>Lixo</p>
+  </div>
+  <div class="card oleo">
+  <h3>Óleo de Cozinha</h3>
+  <p>Lixo</p>
+  </div>
+  <div class="card lampada">
+  <h3>Lâmpadas</h3>
+  <p>Lixo</p>
+  </div>
+  <div class="card moveis">
+  <h3>Móveis e Volumosos</h3>
+  <p>Lixo</p>
+  </div>
+  <div class="card entulho">
+  <h3>Entulho</h3>
+  <p>Lixo</p>
+  </div>
 </section>
+<br><br>
 <footer>
   <p>© 2026 EcoRouter</p>
 </footer>
