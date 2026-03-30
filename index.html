@@ -18,95 +18,87 @@
     <a href="#tipos">Tipos de Lixo</a>
   </nav>
 </header>
+<div class="container">
 <section id="sobre">
   <h2>Sobre</h2>
   <p>Lixo lixo lixo</p>
 </section>
 <section id="coleta">
   <h2>Pontos de Coleta em Taubaté</h2>
-  <!-- FILTRO -->
   <input type="text" id="filtro" placeholder="Filtrar por tipo de lixo...">
-  <!-- PEV Imaculada -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Imaculada</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p> Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
+      <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.047449023860835, -45.545293672440415])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV Cecap -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Cecap</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>Papel, Metal, Plástico, Entulho, Móveis </p>
+      <p>Papel, Metal, Plástico, Entulho, Móveis</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.038419303363188, -45.61880788931474])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV Piratininga -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque Piratininga</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p>Plástico, Vidro, Entulho, Móveis </p>
+      <p>Plástico, Vidro, Entulho, Móveis</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.010131076369166, -45.593815713260426])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV Três Marias -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque Três Marias II</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p> Papel, Orgânico, Resíduos verdes</p>
+      <p>Papel, Orgânico, Resíduos verdes</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.031388956010513, -45.53782141016309])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV Centro -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Centro</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p> Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas </p>
+      <p>Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.028803162170558, -45.55452414441141])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV Itaim -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Itaim</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p> Plástico, Metal, Entulho </p>
+      <p>Plástico, Metal, Entulho</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-23.02017202574099, -45.52601969038315])">Ver no mapa</button>
     </div>
   </div>
-  <!-- PEV São Luiz -->
   <div class="pev">
     <div class="pev-header" onclick="toggle(this)">
       <span>📍 PEV Parque São Luiz</span>
       <span>▼</span>
     </div>
     <div class="pev-info">
-      <p> Vidro, Papel, Móveis
-      </p>
+      <p>Vidro, Papel, Móveis</p>
       <p>🕒 Segunda a sábado: 8h às 17h</p>
       <button class="ir-mapa" onclick="irParaMapa([-22.99772208852909, -45.560003250506306])">Ver no mapa</button>
     </div>
@@ -117,7 +109,7 @@
   <div class="empresa">
     <h3>Pro Ecologic Reciclagem</h3>
     <p>📍 Rua Eduardo Nozelli, 130 - Independência</p>
-    <p>Aceita: plásticos(pricipalmente isopar), metais</p>
+    <p>Aceita: plásticos (principalmente isopor), metais</p>
   </div>
   <div class="empresa">
     <h3>Nair Reciclagem</h3>
@@ -125,6 +117,7 @@
     <p>Aceita: metais, papelão, plástico, baterias, óleo</p>
   </div>
 </section>
+<br>
 <section id="mapa">
   <h2>Mapa de Pontos de Coleta</h2>
   <div id="map"></div>
@@ -180,7 +173,8 @@
   <p>Lixo</p>
   </div>
 </section>
-<br><br>
+<br>
+</div>
 <footer>
   <p>© 2026 EcoRouter</p>
 </footer>
