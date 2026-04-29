@@ -1,141 +1,135 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoRouter</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRoute | Taubaté</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-<header>
-  <h1>EcoRouter</h1>
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#coleta">Pontos de Coleta</a>
-    <a href="#empresas">Locais de Reciclagem</a>
-    <a href="#mapa">Mapa</a>
-    <a href="tipos.html">Tipos de Lixo</a>
-  </nav>
-</header>
-<div class="container">
-<section id="sobre">
-  <h2>Sobre</h2>
-  <p>Lixo lixo lixo</p>
-</section>
-<section id="coleta">
-  <h2>Pontos de Coleta em Taubaté</h2>
-  <input type="text" id="filtro" placeholder="Filtrar por tipo de lixo...">
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Imaculada</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.047449023860835, -45.545293672440415])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Cecap</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Papel, Metal, Plástico, Entulho, Móveis</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.038419303363188, -45.61880788931474])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Parque Piratininga</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Plástico, Vidro, Entulho, Móveis</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.010131076369166, -45.593815713260426])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Parque Três Marias II</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Papel, Orgânico, Resíduos verdes</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.031388956010513, -45.53782141016309])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Centro</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.028803162170558, -45.55452414441141])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Itaim</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Plástico, Metal, Entulho</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-23.02017202574099, -45.52601969038315])">Ver no mapa</button>
-    </div>
-  </div>
-  <div class="pev">
-    <div class="pev-header" onclick="toggle(this)">
-      <span>📍 PEV Parque São Luiz</span>
-      <span>▼</span>
-    </div>
-    <div class="pev-info">
-      <p>Vidro, Papel, Móveis</p>
-      <p>🕒 Segunda a sábado: 8h às 17h</p>
-      <button class="ir-mapa" onclick="irParaMapa([-22.99772208852909, -45.560003250506306])">Ver no mapa</button>
-    </div>
-  </div>
-</section>
-<section id="empresas">
-  <h2>Locais de Reciclagem em Taubaté</h2>
-  <div class="empresa">
-    <h3>Pro Ecologic Reciclagem</h3>
-    <p>📍 Rua Eduardo Nozelli, 130 - Independência</p>
-    <p>Aceita: plásticos (principalmente isopor), metais</p>
-  </div>
-  <div class="empresa">
-    <h3>Nair Reciclagem</h3>
-    <p>📍 Av. Dom Pedro I, 1723 - Parque Três Marias</p>
-    <p>Aceita: metais, papelão, plástico, baterias, óleo</p>
-  </div>
-</section>
-<br>
-<section id="mapa">
-  <h2>Mapa de Pontos de Coleta</h2>
-  <div id="map"></div>
-</section>
-<section id="tipos-link"> 
-    <h2>Tipos de Lixo</h2> 
-    <p>Aprenda os tipos de lixo:</p> 
-    <br>
-    <a href="tipos.html"> 
-    <button>Ver tipos de lixo</button> 
-</a> 
-</section>
-<br>
-</div>
-<footer>
-  <p>© 2026 EcoRouter</p>
-</footer>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="script.js"></script>
+
+    <header id="navbar">
+        <nav class="container">
+            <div class="logo">
+                <h1 style="color: var(--primary); font-size: 1.5rem;">EcoRoute</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#locais">Pontos de Coleta</a></li>
+                <li><a href="#mapa-section">Mapa</a></li>
+                <li><a href="tipos.html">Tipos de Lixo</a></li>
+            </ul>
+            <button class="btn-primary">Sugerir Ponto</button>
+        </nav>
+    </header>
+
+    <section class="hero container" id="sobre">
+        <div class="hero-text">
+            <h1>Descarte em Taubaté no lugar certo</h1>
+            <p>Encontre os Pontos de Entrega Voluntária (PEVs) e locais de reciclagem especializados na nossa cidade.</p>
+            <div class="hero-btns">
+                <a href="#mapa-section" class="btn-primary" style="text-decoration: none;">Ver Mapa Interativo</a>
+                <a href="tipos.html" class="btn-outline" style="text-decoration: none;">Guia de Resíduos</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="map-visual-wrapper">
+                <img src="assets/Mapa.png" alt="EcoRoute Visual" style="width: 100%; border-radius: 20px;">
+            </div>
+        </div>
+    </section>
+
+    <section class="collection-locations" id="locais">
+        <div class="container">
+            <span class="sub-title">MAPEAMENTO LOCAL</span>
+            <h2>Pontos de Coleta (PEVs)</h2>
+            <p style="margin-bottom: 20px; color: var(--text-light);">Clique no ponto para ver detalhes e horários.</p>
+            
+            <div class="locations-filter">
+                <input type="text" id="filtro" placeholder="Busque por bairro ou tipo de lixo (ex: Pilhas, Móveis)...">
+            </div>
+
+            <div class="grid-4" id="locationsGrid">
+                <div class="location-card" onclick="toggleCard(this)">
+                    <div class="card-header elt">
+                        <i class="fas fa-map-marker-alt"></i> 
+                        <span>PEV Imaculada</span>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
+                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.047449, -45.545293])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="toggleCard(this)">
+                    <div class="card-header elt">
+                        <i class="fas fa-plug"></i> 
+                        <span>PEV Centro</span>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <p>Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas</p>
+                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.028803, -45.554524])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="toggleCard(this)">
+                    <div class="card-header rec">
+                        <i class="fas fa-recycle"></i> 
+                        <span>PEV Cecap</span>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <p>Papel, Metal, Plástico, Entulho, Móveis</p>
+                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.038419, -45.618807])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-card" onclick="toggleCard(this)">
+                    <div class="card-header org">
+                        <i class="fas fa-leaf"></i> 
+                        <span>PEV Piratininga</span>
+                        <i class="fas fa-chevron-down arrow-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <p>Plástico, Vidro, Entulho, Móveis</p>
+                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.010131, -45.593815])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mapa-section" class="container" style="padding: 60px 20px;">
+        <span class="sub-title">LOCALIZAÇÃO</span>
+        <h2 style="margin-bottom: 30px;">Mapa Interativo</h2>
+        <div id="map" style="height: 500px; width: 100%; border-radius: 20px; border: 4px solid white; box-shadow: var(--shadow);"></div>
+    </section>
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border);">
+            <p>© 2026 EcoRoute Taubaté</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
