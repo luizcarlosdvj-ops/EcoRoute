@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca Verde | EcoRoute</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --blue: #3498db;
+            --purple: #9b59b6;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border: #edf2f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- NAVBAR PADRONIZADA --- */
+        #navbar {
+            background: var(--white);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-main);
+            margin: 0 15px;
+            font-weight: 500;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        /* Destaque para a página atual */
+        .nav-links li a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- HEADER --- */
+        .page-header {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
+
+        .sub-title {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .page-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        /* --- BOX DESTAQUE (EQUAÇÃO) --- */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 30px rgba(45, 106, 79, 0.2);
+        }
+
+        .highlight-box p.label {
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .highlight-box h2 {
+            font-size: 3.2rem;
+            margin: 15px 0;
+            font-weight: 800;
+        }
+
+        .highlight-box span.obs {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* --- GRID DE CARDS --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-header i {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.4rem;
+        }
+
+        .card-header span {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Tags de Materiais */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+        }
+
+        /* Estilo de Lista no Card */
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .card-list li i {
+            font-size: 1rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--white);
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .highlight-box h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar igual ao seu padrão -->
+    <header id="navbar">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer; font-weight: 800;">EcoRoute</h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="index.html#locais">Pontos de Coleta</a></li>
+                <li><a href="index.html#mapa-section">Mapa</a></li>
+                <li><a href="tipos.html">Tipos de Lixo</a></li>
+                <li><a href="TrocaVerde.html" class="active">Troca Verde</a></li>
+            </ul>
+            <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <!-- Header da Página -->
+        <div class="page-header">
+            <span class="sub-title">Projeto Social Taubaté</span>
+            <h2>Programa Troca Verde</h2>
+            <p style="color: var(--text-light); max-width: 750px; margin: 0 auto; font-size: 1.1rem;">
+                Uma iniciativa do FUSSTA que transforma resíduos recicláveis em alimentos frescos, incentivando a preservação ambiental e a segurança alimentar.
+            </p>
+        </div>
+
+        <!-- Box de Destaque com a Informação Coletada -->
+        <div class="highlight-box">
+            <p class="label">A Equação da Sustentabilidade</p>
+            <h2>1kg de Reciclável = 1kg de Alimento</h2>
+            <span class="obs">*Limite máximo de 15kg de materiais por pessoa por visita.</span>
+        </div>
+
+        <!-- Seção de Detalhes em Cards -->
+        <div class="grid-cards">
+            
+            <!-- Card 1: O que levar -->
+            <div class="card" style="border-top: 5px solid var(--primary);">
+                <div class="card-header">
+                    <i class="fa-solid fa-recycle" style="color: var(--primary); background: #eafaf1;"></i>
+                    <span>O que levar?</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">Os materiais devem estar obrigatoriamente <strong>limpos e secos</strong>:</p>
+                <div class="tag-container">
+                    <span class="tag">Garrafas PET</span>
+                    <span class="tag">Latinhas</span>
+                    <span class="tag">Papelão</span>
+                    <span class="tag">Vidros</span>
+                    <span class="tag">Óleo de Cozinha</span>
+                    <span class="tag">Plásticos Hard</span>
+                </div>
+            </div>
+
+            <!-- Card 2: O que recebe -->
+            <div class="card" style="border-top: 5px solid var(--blue);">
+                <div class="card-header">
+                    <i class="fa-solid fa-basket-shopping" style="color: var(--blue); background: #ebf5ff;"></i>
+                    <span>O que recebe?</span>
+                </div>
+                <ul class="card-list">
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Frutas da Estação</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Legumes e Verduras</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Itens de Cesta Básica</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Como participar -->
+            <div class="card" style="border-top: 5px solid var(--purple);">
+                <div class="card-header">
+                    <i class="fa-solid fa-location-dot" style="color: var(--purple); background: #f5f3ff;"></i>
+                    <span>Como participar?</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem;">
+                    O projeto é itinerante e percorre diversos bairros. Os materiais são pesados na hora e a troca pelo kit de alimentos é imediata.
+                </p>
+                <a href="index.html#mapa-section" style="display: inline-block; margin-top: 20px; color: var(--purple); font-weight: 700; text-decoration: none;">Ver cronograma no mapa →</a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <h2 style="color: var(--primary); font-weight: 800; margin-bottom: 15px;">EcoRoute</h2>
+            <p>© 2026 EcoRoute Taubaté</p>
+        </div>
+    </footer>
+
+</body>
+</html>
