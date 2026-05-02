@@ -1,77 +1,148 @@
-s<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tipos de Lixo - EcoRouter</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Resíduos | EcoRoute</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome 6.4.2 - Versão estável com suporte a todos os ícones abaixo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-  <h1>EcoRouter</h1>
-  <nav>
-    <a href="index.html#sobre">Sobre</a>
-    <a href="index.html#coleta">Pontos de Coleta</a>
-    <a href="index.html#empresas">Locais de Reciclagem</a>
-    <a href="index.html#mapa">Mapa</a>
-    <a href="tipos.html">Tipos de Lixo</a>
-  </nav>
-</header>
-<br>
-<section id="tipos">
-  <h2>Tipos de Lixo e Como Reciclar:</h2>
-  <div class="card papel">
-    <h3>Papel</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card plastico">
-    <h3>Plástico</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card vidro">
-    <h3>Vidro</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card metal">
-    <h3>Metal</h3>
-    <p>Lixo</p>
-  </div>
-  <div class="card organico">
-    <h3>Orgânico</h3>
-    <p>lixi</p>
-  </div>
-  <div class="card eletronico">
-    <h3>Eletrônicos</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card medicamento">
-    <h3>Medicamentos</h3>
-    <p>Lixo</p>
-  </div>
-  <div class="card pilhas">
-    <h3>Pilhas e Baterias</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card oleo">
-    <h3>Óleo de Cozinha</h3>
-    <p>lixo.</p>
-  </div>
-  <div class="card lampada">
-    <h3>Lâmpadas</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card moveis">
-    <h3>Móveis</h3>
-    <p>lixo</p>
-  </div>
-  <div class="card entulho">
-    <h3>Entulho</h3>
-    <p>lixo</p>
-  </div>
-</section>
-<br>
-<footer>
-  <p>© 2026 EcoRouter</p>
-</footer>
+
+    <header id="navbar">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer;">EcoRoute</h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="index.html#locais">Pontos de Coleta</a></li>
+                <li><a href="index.html#mapa-section">Mapa</a></li>
+                <li><a href="tipos.html" style="color: var(--primary);">Tipos de Lixo</a></li>
+            </ul>
+            <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
+        </nav>
+    </header>
+
+    <section class="container" style="padding: 60px 20px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <span class="sub-title">GUIA DE DESCARTE</span>
+            <h2 style="font-size: 2.5rem;">Como separar seus resíduos?</h2>
+            <p style="color: var(--text-light); max-width: 600px; margin: 20px auto;">A separação correta evita a contaminação de materiais recicláveis e preserva o meio ambiente.</p>
+        </div>
+
+        <div class="grid-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            
+            <!-- Papel - Azul -->
+            <div class="location-card" style="border-top: 5px solid var(--blue);">
+                <div class="card-header">
+                    <i class="fa-solid fa-file-lines" style="color: var(--blue); background: #ebf5ff; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Papel</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Jornais, revistas, caixas de papelão e envelopes.</p>
+                    <p><strong>Dica:</strong> Não amasse o papel, apenas dobre se necessário. Evite papéis sujos de gordura.</p>
+                </div>
+            </div>
+
+            <!-- Plástico - Vermelho -->
+            <div class="location-card" style="border-top: 5px solid #e74c3c;">
+                <div class="card-header">
+                    <i class="fa-solid fa-bottle-water" style="color: #e74c3c; background: #fdf2f2; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Plástico</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Garrafas PET, embalagens de limpeza, potes de margarina.</p>
+                    <p><strong>Dica:</strong> Lave as embalagens para remover resíduos de comida.</p>
+                </div>
+            </div>
+
+            <!-- Vidro - Verde -->
+            <div class="location-card" style="border-top: 5px solid var(--primary);">
+                <div class="card-header">
+                    <i class="fa-solid fa-wine-glass" style="color: var(--primary); background: #f0fdf4; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Vidro</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Garrafas, potes de conserva e frascos de perfume.</p>
+                    <p><strong>Dica:</strong> Se estiver quebrado, embale em jornal para não ferir o coletor.</p>
+                </div>
+            </div>
+
+            <!-- Metal - Amarelo -->
+            <div class="location-card" style="border-top: 5px solid #f1c40f;">
+                <div class="card-header">
+                    <i class="fa-solid fa-prescription-bottle" style="color: #f1c40f; background: #fffdf2; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Metal</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Latas de alumínio, latas de conserva, tampinhas de garrafa.</p>
+                    <p><strong>Dica:</strong> Amasse as latas para ocupar menos espaço no transporte.</p>
+                </div>
+            </div>
+
+            <!-- Eletrônicos - Roxo -->
+            <div class="location-card" style="border-top: 5px solid var(--purple);">
+                <div class="card-header">
+                    <i class="fa-solid fa-laptop" style="color: var(--purple); background: #f5f3ff; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Eletrônicos</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Celulares antigos, teclados, cabos e carregadores.</p>
+                    <p><strong>Dica:</strong> Nunca jogue no lixo comum; contêm metais pesados que poluem o solo.</p>
+                </div>
+            </div>
+
+            <!-- Óleo de Cozinha - Laranja -->
+            <div class="location-card" style="border-top: 5px solid var(--orange);">
+                <div class="card-header">
+                    <i class="fa-solid fa-droplet" style="color: var(--orange); background: #fff7ed; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Óleo</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Óleo usado em frituras após esfriar.</p>
+                    <p><strong>Dica:</strong> Armazene em garrafas PET. Um litro de óleo polui 25 mil litros de água.</p>
+                </div>
+            </div>
+
+            <!-- Pilhas e Baterias - Cinza Escuro -->
+            <div class="location-card" style="border-top: 5px solid #34495e;">
+                <div class="card-header">
+                    <i class="fa-solid fa-battery-three-quarters" style="color: #34495e; background: #f8fafc; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Pilhas</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Pilhas AA, AAA e baterias de eletrônicos.</p>
+                    <p><strong>Dica:</strong> Devem ser entregues em pontos de coleta específicos (PEVs).</p>
+                </div>
+            </div>
+
+            <!-- Entulho e Móveis - Cinza Médio -->
+            <div class="location-card" style="border-top: 5px solid #95a5a6;">
+                <div class="card-header">
+                    <i class="fa-solid fa-couch" style="color: #95a5a6; background: #f8fafc; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
+                    <span style="margin-left: 10px; font-weight: 700;">Móveis</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>O que descartar:</strong> Sofás, madeiras, restos de reforma e tijolos.</p>
+                    <p><strong>Dica:</strong> Os PEVs de Taubaté aceitam até 1m³ de entulho por dia por cidadão.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer style="margin-top: 60px; border-top: 1px solid var(--border); padding: 40px 0;">
+        <div class="container" style="text-align: center;">
+            <p>© 2026 EcoRoute Taubaté</p>
+        </div>
+    </footer>
+
 </body>
 </html>
