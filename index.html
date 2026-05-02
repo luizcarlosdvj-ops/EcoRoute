@@ -39,7 +39,7 @@
             <p>Encontre os Pontos de Entrega Voluntária (PEVs) e locais de reciclagem especializados na nossa cidade.</p>
             <div class="hero-btns">
                 <a href="#mapa-section" class="btn-primary" style="text-decoration: none;">Ver Mapa Interativo</a>
-                <a href="tipos.html" class="btn-outline" style="text-decoration: none;">Guia de Resíduos</a>
+                <a href="reciclagem.html" class="btn-outline" style="text-decoration: none;">Guia de Reciclagem</a>
             </div>
         </div>
         <div class="hero-image">
@@ -60,68 +60,214 @@
             </div>
 
             <div class="grid-4" id="locationsGrid">
-                <div class="location-card" onclick="toggleCard(this)">
-                    <div class="card-header elt">
-                        <i class="fas fa-map-marker-alt"></i> 
-                        <span>PEV Imaculada</span>
-                        <i class="fas fa-chevron-down arrow-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
-                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
-                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.047449, -45.545293])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="location-card" onclick="toggleCard(this)">
-                    <div class="card-header elt">
-                        <i class="fas fa-plug"></i> 
-                        <span>PEV Centro</span>
-                        <i class="fas fa-chevron-down arrow-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <p>Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas</p>
-                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
-                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.028803, -45.554524])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="location-card" onclick="toggleCard(this)">
-                    <div class="card-header rec">
-                        <i class="fas fa-recycle"></i> 
-                        <span>PEV Cecap</span>
-                        <i class="fas fa-chevron-down arrow-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <p>Papel, Metal, Plástico, Entulho, Móveis</p>
-                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
-                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.038419, -45.618807])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="location-card" onclick="toggleCard(this)">
-                    <div class="card-header org">
-                        <i class="fas fa-leaf"></i> 
-                        <span>PEV Piratininga</span>
-                        <i class="fas fa-chevron-down arrow-icon"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <p>Plástico, Vidro, Entulho, Móveis</p>
-                            <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
-                            <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.010131, -45.593815])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- 1. PEV Imaculada -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header elt">
+            <i class="fas fa-map-marker-alt"></i> 
+            <span>PEV Imaculada</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho, Pilhas, Lâmpadas</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.047449, -45.545293])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- 2. PEV Centro -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header elt">
+            <i class="fas fa-plug"></i> 
+            <span>PEV Centro</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Plástico, Vidro, Metal, Eletrônicos, Pilhas, Lâmpadas</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.028803, -45.554524])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. PEV Cecap -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-recycle"></i> 
+            <span>PEV Cecap</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Metal, Plástico, Entulho, Móveis</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.038419, -45.618807])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. PEV Piratininga -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header org">
+            <i class="fas fa-leaf"></i> 
+            <span>PEV Piratininga</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Plástico, Vidro, Entulho, Móveis</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.010131, -45.593815])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. PEV Itaim -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-recycle"></i> 
+            <span>PEV Itaim</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Plástico, Vidro, Metal, Móveis, Entulho</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.020458, -45.525984])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. PEV Parque Três Marias II -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-map-marker-alt"></i> 
+            <span>PEV Três Marias II</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Recicláveis, Móveis, Entulho e restos de poda</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.032070, -45.538086])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. PEV Jaraguá -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header elt">
+            <i class="fas fa-plug"></i> 
+            <span>PEV Jaraguá</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Eletrônicos, Pilhas, Lâmpadas, Recicláveis em Geral</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.004223, -45.544695])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. PEV Parque São Luiz -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-recycle"></i> 
+            <span>PEV Parque São Luiz</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Plástico, Vidro, Metal e Entulho</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-22.998140, -45.559973])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. PEV Mourisco -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header org">
+            <i class="fas fa-leaf"></i> 
+            <span>PEV Mourisco</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Entulho, Móveis, Madeira, Galhos e Recicláveis</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.003907, -45.566153])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. PEV Explanada Santa Helena -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-map-marker-alt"></i> 
+            <span>PEV Santa Helena</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Móveis, Entulho de construção, Papel e Metal</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-22.991187, -45.584950])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. PEV Jardim Santa Catarina -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-recycle"></i> 
+            <span>PEV Santa Catarina</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Plástico, Metal, Vidro e restos de obra</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.011018, -45.581459])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. PEV Portal da Mantiqueira -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header org">
+            <i class="fas fa-leaf"></i> 
+            <span>PEV Mantiqueira</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Restos de poda, Galhos, Móveis e Recicláveis</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-23.028081, -45.594763])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. PEV Parque Urupês -->
+    <div class="location-card" onclick="toggleCard(this)">
+        <div class="card-header rec">
+            <i class="fas fa-map-marker-alt"></i> 
+            <span>PEV Parque Urupês</span>
+            <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Papel, Metal, Plástico, Vidro e Móveis</p>
+                <p class="address"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 17:00</p>
+                <button class="btn-outline" onclick="event.stopPropagation(); irParaMapa([-22.999997, -45.533931])" style="width: 100%; margin-top: 15px;">Localizar no Mapa</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <section id="mapa-section" class="container" style="padding: 60px 20px;">
         <span class="sub-title">LOCALIZAÇÃO</span>
