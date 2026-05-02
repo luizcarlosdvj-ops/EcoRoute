@@ -13,18 +13,23 @@
 <body>
 
     <header id="navbar">
-        <nav class="container">
+            <nav class="container">
+            <!-- Erro 1: O h1 não estava fechado e faltava fechar a div da logo -->
             <div class="logo">
-                <h1 style="color: var(--primary); font-size: 1.5rem;">EcoRoute</h1>
+                <a href="index.html" style="text-decoration: none;">
+                <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer;">EcoRoute</h1>
+                </a>
             </div>
             <ul class="nav-links">
-                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
                 <li><a href="#locais">Pontos de Coleta</a></li>
                 <li><a href="#mapa-section">Mapa</a></li>
                 <li><a href="tipos.html">Tipos de Lixo</a></li>
-                <li><a href="#empresas">Seja Parceiro</a></li>
+                <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
             </ul>
-            <button class="btn-primary">Sugerir Ponto</button>
+
+            <a href="#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
 
