@@ -4,19 +4,356 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia de Resíduos | EcoRoute</title>
-    
+
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome 6.4.2 - Versão estável com suporte a todos os ícones abaixo -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-hover: #27ae60;
+            --dark: #0b1c14;
+            --white: #ffffff;
+            --blue: #3498db;
+            --orange: #e67e22;
+            --purple: #9b59b6;
+            --gray-bg: #f8fafc;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+            /* Cores por categoria */
+            --c-papel:      #3b82f6;
+            --c-plastico:   #ef4444;
+            --c-vidro:      #2ecc71;
+            --c-metal:      #64748b;
+            --c-organico:   #a16207;
+            --c-eletro:     #8b5cf6;
+            --c-pilhas:     #f97316;
+            --c-oleo:       #eab308;
+            --c-lampadas:   #06b6d4;
+            --c-med:        #ec4899;
+            --c-moveis:     #78716c;
+            --c-entulho:    #9ca3af;
+            --c-textil:     #14b8a6;
+            --c-toxico:     #dc2626;
+            --c-hospitalar: #be185d;
+            --c-pneu:       #1e293b;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== NAVBAR ===== */
+        header#navbar {
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        header#navbar nav { display: flex; justify-content: space-between; align-items: center; }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a {
+            text-decoration: none; color: var(--text-main);
+            margin: 0 15px; font-weight: 500; transition: color 0.3s;
+        }
+        .nav-links li a:hover { color: var(--primary); }
+        .btn-primary {
+            background: var(--primary); color: white;
+            padding: 12px 25px; border: none; border-radius: 8px;
+            cursor: pointer; font-weight: 600; transition: 0.3s;
+            text-decoration: none; display: inline-block;
+        }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .sub-title {
+            color: var(--primary); font-weight: 700;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            font-size: 0.78rem; display: block; margin-bottom: 10px;
+        }
+
+        /* ===== HERO ===== */
+        .page-hero {
+            background: var(--dark);
+            padding: 80px 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(46,204,113,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 20%, rgba(52,152,219,0.08) 0%, transparent 50%);
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 780px; margin: 0 auto;
+            text-align: center; padding-bottom: 70px;
+        }
+        .hero-content h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 em { color: var(--primary); font-style: italic; }
+        .hero-content p { color: rgba(255,255,255,0.65); font-size: 1.1rem; max-width: 560px; margin: 0 auto 40px; }
+
+        /* Barra de busca */
+        .search-wrap {
+            position: relative; max-width: 520px; margin: 0 auto;
+        }
+        .search-wrap input {
+            width: 100%; padding: 18px 24px 18px 54px;
+            border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(8px);
+            color: white; font-size: 1rem; font-family: 'Inter', sans-serif;
+            outline: none; transition: border 0.3s;
+        }
+        .search-wrap input::placeholder { color: rgba(255,255,255,0.35); }
+        .search-wrap input:focus { border-color: var(--primary); }
+        .search-wrap i {
+            position: absolute; left: 20px; top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.4); font-size: 1rem;
+        }
+
+        /* Wave divider */
+        .wave-divider { display: block; margin-top: -2px; }
+
+        /* ===== FILTROS POR CATEGORIA ===== */
+        .filters-bar {
+            padding: 30px 20px;
+            background: var(--gray-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 62px; z-index: 90;
+        }
+        .filters-inner {
+            display: flex; gap: 10px; flex-wrap: wrap;
+            max-width: 1200px; margin: 0 auto; justify-content: center;
+        }
+        .filter-btn {
+            padding: 8px 18px; border-radius: 50px;
+            border: 1.5px solid var(--border);
+            background: white; cursor: pointer;
+            font-size: 0.82rem; font-weight: 600; font-family: 'Inter', sans-serif;
+            color: var(--text-light); transition: all 0.25s;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .filter-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+        /* ===== GRID DE CARDS ===== */
+        .cards-section { padding: 60px 20px 80px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--dark); }
+
+        .waste-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+        }
+
+        /* Card principal */
+        .waste-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+        }
+        .waste-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+        .waste-card.hidden { display: none; }
+
+        /* Topo colorido */
+        .card-top {
+            padding: 28px 24px 20px;
+            position: relative;
+        }
+        .card-accent {
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 4px;
+            transition: height 0.3s;
+        }
+        .waste-card:hover .card-accent { height: 6px; }
+
+        .card-icon-wrap {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 16px;
+            transition: transform 0.3s;
+        }
+        .waste-card:hover .card-icon-wrap { transform: rotate(-5deg) scale(1.1); }
+
+        .card-top h3 { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .card-top .category-badge {
+            display: inline-block; font-size: 0.7rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        /* Corpo expansível */
+        .card-body-wrap {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.45s ease;
+            border-top: 1px solid transparent;
+        }
+        .waste-card.open .card-body-wrap {
+            max-height: 400px;
+            border-top-color: var(--border);
+        }
+        .card-body-content { padding: 20px 24px 24px; }
+
+        .info-block { margin-bottom: 14px; }
+        .info-block:last-child { margin-bottom: 0; }
+        .info-label {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 5px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .info-label i { font-size: 0.7rem; }
+        .info-block p { font-size: 0.9rem; color: var(--text-main); line-height: 1.55; }
+
+        .tip-box {
+            background: var(--gray-bg); border-radius: 10px;
+            padding: 12px 14px; font-size: 0.85rem;
+            color: var(--text-light); margin-top: 14px;
+            display: flex; gap: 8px; align-items: flex-start;
+        }
+        .tip-box i { color: var(--primary); margin-top: 2px; flex-shrink: 0; }
+
+        /* Preview (quando fechado) */
+        .card-preview {
+            padding: 0 24px 20px;
+            font-size: 0.88rem; color: var(--text-light);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .waste-card.open .card-preview { display: none; }
+        .toggle-hint { font-size: 0.78rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .toggle-hint i { transition: transform 0.3s; }
+        .waste-card.open .toggle-hint i { transform: rotate(180deg); }
+
+        /* Perigo badge */
+        .danger-badge {
+            position: absolute; top: 14px; right: 14px;
+            background: #fef2f2; color: #dc2626;
+            font-size: 0.65rem; font-weight: 700; padding: 3px 8px;
+            border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+            border: 1px solid #fecaca;
+        }
+
+        /* Contagem de resultados */
+        .results-count {
+            text-align: center; margin-bottom: 30px;
+            font-size: 0.9rem; color: var(--text-light);
+        }
+        .results-count strong { color: var(--primary); }
+
+        /* Nenhum resultado */
+        .no-results {
+            text-align: center; padding: 80px 20px;
+            display: none;
+            grid-column: 1 / -1;
+        }
+        .no-results i { font-size: 3rem; color: var(--border); margin-bottom: 15px; display: block; }
+        .no-results p { color: var(--text-light); }
+
+        /* ===== TABELA DE CORES DE LIXO ===== */
+        .color-guide { background: var(--dark); padding: 80px 20px; }
+        .color-guide h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: white; text-align: center; margin-bottom: 12px; }
+        .color-guide > .container > p { color: rgba(255,255,255,0.55); text-align: center; margin-bottom: 50px; }
+        .bins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+        }
+        .bin-item { text-align: center; }
+        .bin-icon {
+            width: 70px; height: 85px;
+            border-radius: 12px 12px 8px 8px;
+            margin: 0 auto 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: white;
+            position: relative;
+        }
+        .bin-icon::after {
+            content: '';
+            position: absolute; top: -6px; left: 10px; right: 10px; height: 6px;
+            border-radius: 3px;
+            background: inherit;
+            filter: brightness(0.8);
+        }
+        .bin-item h4 { font-size: 0.85rem; font-weight: 700; color: white; margin-bottom: 4px; }
+        .bin-item p { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+        /* ===== CTA ===== */
+        .cta-strip {
+            padding: 70px 20px;
+            text-align: center;
+        }
+        .cta-strip h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 12px; }
+        .cta-strip p { color: var(--text-light); margin-bottom: 30px; }
+        .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--border);
+            padding: 12px 24px; border-radius: 8px; cursor: pointer;
+            transition: 0.3s; color: var(--text-main); font-weight: 500;
+            font-family: 'Inter', sans-serif; text-decoration: none;
+            display: inline-block; font-size: 0.95rem;
+        }
+        .btn-outline:hover { background: var(--gray-bg); border-color: var(--primary); color: var(--primary); }
+
+        /* ===== FOOTER ===== */
+        footer { border-top: 1px solid var(--border); padding: 40px 0; }
+        footer .container { text-align: center; }
+        footer p { color: var(--text-light); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .waste-grid { grid-template-columns: 1fr; }
+            .filters-bar { top: 56px; }
+        }
+        @media (max-width: 500px) {
+            .bins-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Animação de entrada */
+        .waste-card {
+            opacity: 0;
+            animation: fadeUp 0.4s ease forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ===== NAVBAR ===== -->
     <header id="navbar">
         <nav class="container">
             <div class="logo">
                 <a href="index.html" style="text-decoration: none;">
-                <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer;">EcoRoute</h1>
+                    <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer;">EcoRoute</h1>
                 </a>
             </div>
             <ul class="nav-links">
@@ -25,124 +362,677 @@
                 <li><a href="index.html#locais">Pontos de Coleta</a></li>
                 <li><a href="index.html#mapa-section">Mapa</a></li>
                 <li><a href="tipos.html" style="color: var(--primary);">Tipos de Lixo</a></li>
+                <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
             </ul>
             <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
 
-    <section class="container" style="padding: 60px 20px;">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <span class="sub-title">GUIA DE DESCARTE</span>
-            <h2 style="font-size: 2.5rem;">Como separar seus resíduos?</h2>
-            <p style="color: var(--text-light); max-width: 600px; margin: 20px auto;">A separação correta evita a contaminação de materiais recicláveis e preserva o meio ambiente.</p>
+    <!-- ===== HERO ===== -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <span class="sub-title">GUIA COMPLETO DE DESCARTE</span>
+            <h1>Cada resíduo tem<br>um <em>destino certo</em></h1>
+            <p>Saiba como separar, preparar e descartar cada tipo de lixo para garantir que seja aproveitado corretamente.</p>
+            <div class="search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Busque por tipo de lixo... (ex: pilha, plástico, óleo)">
+            </div>
         </div>
+        <svg class="wave-divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block; background: var(--dark);">
+            <path fill="#f8fafc" d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z"/>
+        </svg>
+    </section>
 
-        <div class="grid-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-            
-            <!-- Papel - Azul -->
-            <div class="location-card" style="border-top: 5px solid var(--blue);">
-                <div class="card-header">
-                    <i class="fa-solid fa-file-lines" style="color: var(--blue); background: #ebf5ff; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Papel</span>
+    <!-- ===== FILTROS ===== -->
+    <div class="filters-bar">
+        <div class="filters-inner">
+            <button class="filter-btn active" data-filter="all" onclick="filterCards('all', this)">
+                <span class="filter-dot" style="background: var(--primary);"></span> Todos
+            </button>
+            <button class="filter-btn" data-filter="reciclaveis" onclick="filterCards('reciclaveis', this)">
+                <span class="filter-dot" style="background: #3b82f6;"></span> Recicláveis Secos
+            </button>
+            <button class="filter-btn" data-filter="especiais" onclick="filterCards('especiais', this)">
+                <span class="filter-dot" style="background: #f97316;"></span> Resíduos Especiais
+            </button>
+            <button class="filter-btn" data-filter="organico" onclick="filterCards('organico', this)">
+                <span class="filter-dot" style="background: #a16207;"></span> Orgânicos
+            </button>
+            <button class="filter-btn" data-filter="perigosos" onclick="filterCards('perigosos', this)">
+                <span class="filter-dot" style="background: #dc2626;"></span> Perigosos
+            </button>
+            <button class="filter-btn" data-filter="grandes" onclick="filterCards('grandes', this)">
+                <span class="filter-dot" style="background: #78716c;"></span> Volumosos
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== CARDS ===== -->
+    <section class="cards-section">
+        <div class="container">
+            <p class="results-count" id="resultsCount">Mostrando <strong id="countNum">15</strong> tipos de resíduos</p>
+            <div class="waste-grid" id="wasteGrid">
+
+                <!-- 1. PAPEL -->
+                <div class="waste-card" data-tags="papel jornal revista papelão caixa caderno" data-cat="reciclaveis" style="animation-delay: 0.05s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-papel);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #eff6ff; color: var(--c-papel);">
+                            <i class="fas fa-file-lines"></i>
+                        </div>
+                        <h3>Papel e Papelão</h3>
+                        <span class="category-badge" style="background:#eff6ff; color:var(--c-papel);">Reciclável Seco</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Jornais, revistas, caixas...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-papel)"></i> O que descartar</p>
+                                <p>Jornais, revistas, folhas, cadernos, caixas de papelão, envelopes, sacolas de papel e embalagens tipo Tetra Pak (sem líquido).</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-times-circle" style="color:#ef4444"></i> O que NÃO descartar</p>
+                                <p>Papel higiênico, guardanapos usados, papel parafinado, fotografias e papel carbono — estes não são recicláveis.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Não amasse o papel. Apenas dobre se necessário. Evite papéis sujos de gordura ou molhados, pois contaminam o lote.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Jornais, revistas, caixas de papelão e envelopes.</p>
-                    <p><strong>Dica:</strong> Não amasse o papel, apenas dobre se necessário. Evite papéis sujos de gordura.</p>
+
+                <!-- 2. PLÁSTICO -->
+                <div class="waste-card" data-tags="plástico pet garrafa pote embalagem sacola" data-cat="reciclaveis" style="animation-delay: 0.1s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-plastico);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fef2f2; color: var(--c-plastico);">
+                            <i class="fas fa-bottle-water"></i>
+                        </div>
+                        <h3>Plástico</h3>
+                        <span class="category-badge" style="background:#fef2f2; color:var(--c-plastico);">Reciclável Seco</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Garrafas PET, potes, embalagens...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-plastico)"></i> O que descartar</p>
+                                <p>Garrafas PET, embalagens de limpeza e higiene, potes de margarina, sacolas, canudos, tampas plásticas e embalagens de shampoo.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-times-circle" style="color:#ef4444"></i> O que NÃO descartar</p>
+                                <p>Fraldas descartáveis, esponjas, tomadas, cabos de panela e acrílico. Estes não têm processo de reciclagem convencional.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Lave as embalagens para remover resíduos de comida. Amasse as garrafas e tampas para economizar espaço.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- 3. VIDRO -->
+                <div class="waste-card" data-tags="vidro garrafa pote frasco" data-cat="reciclaveis" style="animation-delay: 0.15s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-vidro);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f0fdf4; color: var(--c-vidro);">
+                            <i class="fas fa-wine-glass"></i>
+                        </div>
+                        <h3>Vidro</h3>
+                        <span class="category-badge" style="background:#f0fdf4; color:var(--c-vidro);">Reciclável Seco</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Garrafas, potes de conserva...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-vidro)"></i> O que descartar</p>
+                                <p>Garrafas de bebidas, potes de conserva e molhos, frascos de perfume e cosméticos, e copos de vidro.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-times-circle" style="color:#ef4444"></i> O que NÃO descartar</p>
+                                <p>Espelhos, vidros de janela, lâmpadas, telas de TV/monitor, cristais e vidros temperados — composições diferentes impedem a reciclagem.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Se estiver quebrado, embale em jornal grosso e identifique "VIDRO QUEBRADO" para não ferir o coletor. Descarte com segurança!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. METAL -->
+                <div class="waste-card" data-tags="metal alumínio lata aço ferro" data-cat="reciclaveis" style="animation-delay: 0.2s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-metal);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f1f5f9; color: var(--c-metal);">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>Metal e Alumínio</h3>
+                        <span class="category-badge" style="background:#f1f5f9; color:var(--c-metal);">Reciclável Seco</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Latas, tampinhas, panelas...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-metal)"></i> O que descartar</p>
+                                <p>Latas de alumínio e aço, tampinhas de garrafa, embalagens de aerossol (vazias), panelas velhas sem cabo plástico, parafusos e pregos.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-times-circle" style="color:#ef4444"></i> O que NÃO descartar</p>
+                                <p>Latas de tinta, amianto, clipes de papel (pequenos demais para as esteiras de triagem).</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Amasse as latas para economizar espaço. Reciclar alumínio gasta até 95% menos energia do que extrair do minério!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. ELETRÔNICOS -->
+                <div class="waste-card" data-tags="eletrônico celular computador teclado cabo tv monitor" data-cat="especiais" style="animation-delay: 0.25s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-eletro);"></div>
+                    <span class="danger-badge">PEV Especial</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f5f3ff; color: var(--c-eletro);">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Eletrônicos (e-lixo)</h3>
+                        <span class="category-badge" style="background:#f5f3ff; color:var(--c-eletro);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Celulares, computadores, cabos...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-eletro)"></i> O que descartar</p>
+                                <p>Celulares, tablets, computadores, monitores, impressoras, teclados, mouses, cabos, carregadores, eletrodomésticos pequenos e rádios.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#f97316"></i> Atenção</p>
+                                <p>Nunca jogue no lixo comum. Contêm metais pesados (chumbo, mercúrio, cádmio) que contaminam o solo por décadas.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Leve ao PEV Centro (aceita eletrônicos) ou procure o programa de logística reversa da marca do aparelho.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. PILHAS E BATERIAS -->
+                <div class="waste-card" data-tags="pilha bateria aa aaa" data-cat="especiais" style="animation-delay: 0.3s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-pilhas);"></div>
+                    <span class="danger-badge">PEV Especial</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fff7ed; color: var(--c-pilhas);">
+                            <i class="fas fa-battery-three-quarters"></i>
+                        </div>
+                        <h3>Pilhas e Baterias</h3>
+                        <span class="category-badge" style="background:#fff7ed; color:var(--c-pilhas);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>AA, AAA, baterias de celular...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-pilhas)"></i> O que descartar</p>
+                                <p>Pilhas AA, AAA, C, D, 9V; baterias de celulares, notebooks, câmeras fotográficas, relógios e controles remotos.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Por que é tão grave</p>
+                                <p>Uma única pilha pode contaminar até 600.000 litros de água. Contêm mercúrio, chumbo e cádmio — metais altamente tóxicos.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Guarde em um recipiente seco e vedado até ter quantidade suficiente para levar ao PEV. Todos os PEVs de Taubaté aceitam pilhas.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. ÓLEO DE COZINHA -->
+                <div class="waste-card" data-tags="óleo cozinha fritura gordura" data-cat="especiais" style="animation-delay: 0.35s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-oleo);"></div>
+                    <span class="danger-badge">PEV Especial</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fefce8; color: var(--c-oleo);">
+                            <i class="fas fa-droplet"></i>
+                        </div>
+                        <h3>Óleo de Cozinha</h3>
+                        <span class="category-badge" style="background:#fefce8; color:var(--c-oleo);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Óleo de fritura usado...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-oleo)"></i> O que descartar</p>
+                                <p>Óleo vegetal usado em frituras (soja, girassol, canola, milho), óleo de oliva e gordura animal líquida após esfriar completamente.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Nunca faça isso</p>
+                                <p>Não despeje na pia ou no vaso sanitário — um litro de óleo contamina até 25.000 litros de água e entope a rede de esgoto.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Armazene em garrafa PET fechada após esfriar. O óleo coletado vira biodiesel — um combustível limpo e renovável!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. LÂMPADAS -->
+                <div class="waste-card" data-tags="lâmpada fluorescente led mercúrio luz" data-cat="especiais" style="animation-delay: 0.4s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-lampadas);"></div>
+                    <span class="danger-badge">PEV Especial</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #ecfeff; color: var(--c-lampadas);">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Lâmpadas</h3>
+                        <span class="category-badge" style="background:#ecfeff; color:var(--c-lampadas);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Fluorescentes, LED, incandescentes...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-lampadas)"></i> O que descartar</p>
+                                <p>Lâmpadas fluorescentes (tubos e compactas), lâmpadas de vapor de sódio, LED e lâmpadas incandescentes comuns.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Atenção especial</p>
+                                <p>Lâmpadas fluorescentes contêm mercúrio gasoso. Se quebrar, ventile o ambiente e não toque nos fragmentos sem luvas.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Transport as lâmpadas inteiras dentro de sua embalagem original ou enroladas em jornal. PEVs Imaculada e Centro aceitam lâmpadas.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. MEDICAMENTOS -->
+                <div class="waste-card" data-tags="medicamento remédio comprimido farmácia" data-cat="especiais" style="animation-delay: 0.45s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-med);"></div>
+                    <span class="danger-badge">Farmácia</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fdf2f8; color: var(--c-med);">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3>Medicamentos</h3>
+                        <span class="category-badge" style="background:#fdf2f8; color:var(--c-med);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Remédios vencidos ou não usados...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-med)"></i> O que descartar</p>
+                                <p>Comprimidos, cápsulas, xaropes, pomadas, injetáveis, colírios e quaisquer medicamentos vencidos ou sem uso — nas embalagens originais.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Nunca faça isso</p>
+                                <p>Não jogue no lixo comum nem descarte na pia ou vaso. Substâncias ativas contaminam a água e o solo por anos.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Leve a qualquer farmácia participante do Programa Descarte Correto de Medicamentos — elas são obrigadas a receber.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. ORGÂNICO -->
+                <div class="waste-card" data-tags="orgânico comida sobra casca restos compostagem" data-cat="organico" style="animation-delay: 0.5s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-organico);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fefce8; color: var(--c-organico);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Resíduo Orgânico</h3>
+                        <span class="category-badge" style="background:#fefce8; color:var(--c-organico);">Orgânico</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Restos de comida, cascas, borra...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-organico)"></i> O que descartar</p>
+                                <p>Restos de frutas e legumes, borra de café, cascas de ovos, folhas de jardim, pão velho e restos de refeições (sem ossos).</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-seedling" style="color:var(--c-organico)"></i> Melhor destino: Compostagem</p>
+                                <p>O resíduo orgânico pode virar adubo rico em nutrientes através da compostagem doméstica ou coletiva. Evita metano nos aterros.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Monte uma composteira em casa com um balde furado! Você produz seu próprio adubo e reduz o lixo em até 50%.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. TÊXTIL -->
+                <div class="waste-card" data-tags="roupa tecido têxtil vestuário calçado sapato" data-cat="especiais" style="animation-delay: 0.55s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-textil);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f0fdfa; color: var(--c-textil);">
+                            <i class="fas fa-shirt"></i>
+                        </div>
+                        <h3>Roupas e Têxteis</h3>
+                        <span class="category-badge" style="background:#f0fdfa; color:var(--c-textil);">Resíduo Especial</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Roupas, calçados, tecidos...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-textil)"></i> O que descartar</p>
+                                <p>Roupas, sapatos, bolsas, cintos, meias e tecidos em geral — sejam em bom estado (doação) ou desgastados (reciclagem industrial).</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-heart" style="color:#ec4899"></i> Dê prioridade à doação</p>
+                                <p>Se a peça ainda está em bom estado, doe para entidades sociais. Brechós e bazares transformam sua roupa em renda para quem precisa.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Trapos e panos desgastados podem virar estopa industrial. Procure empresas de reciclagem têxtil em Taubaté.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. MÓVEIS E VOLUMOSOS -->
+                <div class="waste-card" data-tags="móvel sofá madeira colchão grande volumoso" data-cat="grandes" style="animation-delay: 0.6s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-moveis);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #faf8f7; color: var(--c-moveis);">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <h3>Móveis e Volumosos</h3>
+                        <span class="category-badge" style="background:#faf8f7; color:var(--c-moveis);">Volumoso</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Sofás, colchões, madeiras...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-moveis)"></i> O que descartar</p>
+                                <p>Sofás, cadeiras, mesas, armários, colchões, estantes e quaisquer itens de grande porte que não cabem no lixo comum.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-info-circle" style="color:#64748b"></i> Limite por cidadão</p>
+                                <p>Os PEVs de Taubaté aceitam até 1m³ de resíduos volumosos por dia, por cidadão. Acima disso, contrate uma caçamba regularizada.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Se o item ainda estiver em bom estado, doe antes de descartar! Coloque na calçada com cartaz "PEGUEM" ou anuncie em grupos online.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. ENTULHO -->
+                <div class="waste-card" data-tags="entulho construção obra tijolo cimento pedra" data-cat="grandes" style="animation-delay: 0.65s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-entulho);"></div>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f8fafc; color: var(--c-entulho);">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3>Entulho de Obra</h3>
+                        <span class="category-badge" style="background:#f8fafc; color:var(--c-entulho);">Volumoso</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Tijolos, concreto, azulejos...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-entulho)"></i> O que descartar</p>
+                                <p>Tijolos, concreto, argamassa, azulejos, pisos, gesso, madeira de obra, tubos e conexões hidráulicas velhas.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-times-circle" style="color:#ef4444"></i> O que NÃO misturar</p>
+                                <p>Não misture entulho com lixo doméstico, amianto ou resíduos químicos — isso contamina o material e impede o reaproveitamento.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Entulho limpo pode ser triturado e reaproveitado como agregado em novas construções. Separe e leve aos PEVs Imaculada, Cecap ou Piratininga.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. PNEUS -->
+                <div class="waste-card" data-tags="pneu borracha automóvel carro moto" data-cat="perigosos" style="animation-delay: 0.7s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-pneu);"></div>
+                    <span class="danger-badge">Perigoso</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #f1f5f9; color: var(--c-pneu);">
+                            <i class="fas fa-circle-dot"></i>
+                        </div>
+                        <h3>Pneus</h3>
+                        <span class="category-badge" style="background:#f1f5f9; color:var(--c-pneu);">Perigoso</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Pneus de carro, moto, bicicleta...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-pneu)"></i> O que descartar</p>
+                                <p>Pneus de automóveis, motocicletas, bicicletas, caminhões e máquinas agrícolas — inteiros ou em pedaços.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Por que é tão grave</p>
+                                <p>Pneus descartados incorretamente acumulam água parada e viram criadouro do mosquito da dengue. A queima libera gases altamente tóxicos.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Leve à borracharia ou à concessionária mais próxima. Borracheiros são obrigados por lei a receber pneus velhos sem custo adicional.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. RESÍDUOS TÓXICOS DOMÉSTICOS -->
+                <div class="waste-card" data-tags="tóxico tinta agrotóxico pesticida solvente químico" data-cat="perigosos" style="animation-delay: 0.75s" onclick="toggleCard(this)">
+                    <div class="card-accent" style="background: var(--c-toxico);"></div>
+                    <span class="danger-badge">Perigoso</span>
+                    <div class="card-top">
+                        <div class="card-icon-wrap" style="background: #fef2f2; color: var(--c-toxico);">
+                            <i class="fas fa-skull-crossbones"></i>
+                        </div>
+                        <h3>Resíduos Tóxicos</h3>
+                        <span class="category-badge" style="background:#fef2f2; color:var(--c-toxico);">Perigoso</span>
+                    </div>
+                    <div class="card-preview">
+                        <span>Tintas, solventes, pesticidas...</span>
+                        <span class="toggle-hint">Ver mais <i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="card-body-wrap">
+                        <div class="card-body-content">
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-check-circle" style="color:var(--c-toxico)"></i> O que descartar</p>
+                                <p>Tintas, vernizes, solventes, thinner, colas industriais, pesticidas domésticos, inseticidas, produtos de limpeza concentrados e fertilizantes.</p>
+                            </div>
+                            <div class="info-block">
+                                <p class="info-label"><i class="fas fa-triangle-exclamation" style="color:#ef4444"></i> Nunca faça isso</p>
+                                <p>Nunca despeje no ralo, lixo comum ou terreno. São substâncias que contaminam lençóis freáticos e são altamente persistentes no ambiente.</p>
+                            </div>
+                            <div class="tip-box">
+                                <i class="fas fa-phone"></i>
+                                <span>Guarde nas embalagens originais fechadas e contate a prefeitura de Taubaté para informações sobre coleta especial de resíduos perigosos.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Plástico - Vermelho -->
-            <div class="location-card" style="border-top: 5px solid #e74c3c;">
-                <div class="card-header">
-                    <i class="fa-solid fa-bottle-water" style="color: #e74c3c; background: #fdf2f2; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Plástico</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Garrafas PET, embalagens de limpeza, potes de margarina.</p>
-                    <p><strong>Dica:</strong> Lave as embalagens para remover resíduos de comida.</p>
-                </div>
+            <!-- Sem resultados -->
+            <div id="noResults" style="display:none; text-align:center; padding: 80px 20px; grid-column: 1/-1;">
+                <i class="fas fa-search" style="font-size: 3rem; color: var(--border); margin-bottom: 15px; display:block;"></i>
+                <p style="color: var(--text-light); font-size: 1.05rem;">Nenhum resultado encontrado para "<span id="searchTerm"></span>"</p>
+                <p style="color: var(--text-light); margin-top: 8px; font-size: 0.9rem;">Tente palavras como: papel, plástico, pilha, óleo, pneu...</p>
             </div>
-
-            <!-- Vidro - Verde -->
-            <div class="location-card" style="border-top: 5px solid var(--primary);">
-                <div class="card-header">
-                    <i class="fa-solid fa-wine-glass" style="color: var(--primary); background: #f0fdf4; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Vidro</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Garrafas, potes de conserva e frascos de perfume.</p>
-                    <p><strong>Dica:</strong> Se estiver quebrado, embale em jornal para não ferir o coletor.</p>
-                </div>
-            </div>
-
-            <!-- Metal - Amarelo -->
-            <div class="location-card" style="border-top: 5px solid #f1c40f;">
-                <div class="card-header">
-                    <i class="fa-solid fa-prescription-bottle" style="color: #f1c40f; background: #fffdf2; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Metal</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Latas de alumínio, latas de conserva, tampinhas de garrafa.</p>
-                    <p><strong>Dica:</strong> Amasse as latas para ocupar menos espaço no transporte.</p>
-                </div>
-            </div>
-
-            <!-- Eletrônicos - Roxo -->
-            <div class="location-card" style="border-top: 5px solid var(--purple);">
-                <div class="card-header">
-                    <i class="fa-solid fa-laptop" style="color: var(--purple); background: #f5f3ff; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Eletrônicos</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Celulares antigos, teclados, cabos e carregadores.</p>
-                    <p><strong>Dica:</strong> Nunca jogue no lixo comum; contêm metais pesados que poluem o solo.</p>
-                </div>
-            </div>
-
-            <!-- Óleo de Cozinha - Laranja -->
-            <div class="location-card" style="border-top: 5px solid var(--orange);">
-                <div class="card-header">
-                    <i class="fa-solid fa-droplet" style="color: var(--orange); background: #fff7ed; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Óleo</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Óleo usado em frituras após esfriar.</p>
-                    <p><strong>Dica:</strong> Armazene em garrafas PET. Um litro de óleo polui 25 mil litros de água.</p>
-                </div>
-            </div>
-
-            <!-- Pilhas e Baterias - Cinza Escuro -->
-            <div class="location-card" style="border-top: 5px solid #34495e;">
-                <div class="card-header">
-                    <i class="fa-solid fa-battery-three-quarters" style="color: #34495e; background: #f8fafc; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Pilhas</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Pilhas AA, AAA e baterias de eletrônicos.</p>
-                    <p><strong>Dica:</strong> Devem ser entregues em pontos de coleta específicos (PEVs).</p>
-                </div>
-            </div>
-
-            <!-- Entulho e Móveis - Cinza Médio -->
-            <div class="location-card" style="border-top: 5px solid #95a5a6;">
-                <div class="card-header">
-                    <i class="fa-solid fa-couch" style="color: #95a5a6; background: #f8fafc; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px;"></i>
-                    <span style="margin-left: 10px; font-weight: 700;">Móveis</span>
-                </div>
-                <div class="card-body">
-                    <p><strong>O que descartar:</strong> Sofás, madeiras, restos de reforma e tijolos.</p>
-                    <p><strong>Dica:</strong> Os PEVs de Taubaté aceitam até 1m³ de entulho por dia por cidadão.</p>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <footer style="margin-top: 60px; border-top: 1px solid var(--border); padding: 40px 0;">
-        <div class="container" style="text-align: center;">
-            <p>© 2026 EcoRoute Taubaté</p>
+    <!-- ===== GUIA DE CORES DE LIXO ===== -->
+    <section class="color-guide">
+        <div class="container">
+            <span class="sub-title" style="text-align:center; display:block; color:var(--primary);">REFERÊNCIA RÁPIDA</span>
+            <h2>Cores das Lixeiras</h2>
+            <p>No Brasil, as lixeiras de coleta seletiva seguem um padrão de cores definido por lei.</p>
+            <div class="bins-grid">
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #3b82f6;"><i class="fas fa-newspaper"></i></div>
+                    <h4>Azul</h4>
+                    <p>Papel e Papelão</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #ef4444;"><i class="fas fa-bottle-water"></i></div>
+                    <h4>Vermelho</h4>
+                    <p>Plástico</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: var(--primary);"><i class="fas fa-wine-glass"></i></div>
+                    <h4>Verde</h4>
+                    <p>Vidro</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #eab308;"><i class="fas fa-cube"></i></div>
+                    <h4>Amarelo</h4>
+                    <p>Metal</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #92400e;"><i class="fas fa-leaf"></i></div>
+                    <h4>Marrom</h4>
+                    <p>Orgânico</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #f97316;"><i class="fas fa-flask"></i></div>
+                    <h4>Laranja</h4>
+                    <p>Perigosos</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #ec4899;"><i class="fas fa-plus"></i></div>
+                    <h4>Rosa</h4>
+                    <p>Saúde/Hospital</p>
+                </div>
+                <div class="bin-item">
+                    <div class="bin-icon" style="background: #475569;"><i class="fas fa-ban"></i></div>
+                    <h4>Cinza</h4>
+                    <p>Não Reciclável</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-strip">
+        <div class="container">
+            <span class="sub-title">PRÓXIMO PASSO</span>
+            <h2>Onde descartar em Taubaté?</h2>
+            <p>Agora que você sabe separar, encontre o ponto de coleta mais próximo da sua casa.</p>
+            <div class="cta-btns">
+                <a href="index.html#mapa-section" class="btn-primary">
+                    <i class="fas fa-map-marked-alt" style="margin-right: 8px;"></i>Ver Mapa de PEVs
+                </a>
+                <a href="reciclagem.html" class="btn-outline">
+                    <i class="fas fa-recycle" style="margin-right: 8px;"></i>Guia de Reciclagem
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2026 EcoRoute Taubaté — Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        // Toggle cards ao clicar
+        function toggleCard(el) {
+            el.classList.toggle('open');
+        }
+
+        // Busca
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.waste-card');
+        const countNum = document.getElementById('countNum');
+        const noResults = document.getElementById('noResults');
+        const searchTerm = document.getElementById('searchTerm');
+
+        function updateCount() {
+            const visible = document.querySelectorAll('.waste-card:not([style*="display: none"])').length;
+            countNum.textContent = visible;
+            noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const q = this.value.toLowerCase().trim();
+            searchTerm.textContent = q;
+            cards.forEach(card => {
+                const tags = card.dataset.tags || '';
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const match = tags.includes(q) || title.includes(q) || q === '';
+                card.style.display = match ? '' : 'none';
+            });
+            updateCount();
+        });
+
+        // Filtro por categoria
+        function filterCards(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            cards.forEach(card => {
+                const match = cat === 'all' || card.dataset.cat === cat;
+                card.style.display = match ? '' : 'none';
+            });
+            // Resetar busca
+            searchInput.value = '';
+            updateCount();
+        }
+
+        updateCount();
+    </script>
 
 </body>
 </html>
