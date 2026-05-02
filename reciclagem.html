@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRoute | Guia de Reciclagem</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== VARIÁVEIS (espelhando o style.css do projeto) ===== */
+        :root {
+            --primary: #2ecc71;
+            --primary-hover: #27ae60;
+            --dark: #0b1c14;
+            --white: #ffffff;
+            --gray-bg: #f8fafc;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== NAVBAR (idêntica ao site) ===== */
+        header#navbar {
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        header#navbar nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-main);
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links li a:hover { color: var(--primary); }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .sub-title {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ===== HERO DA PÁGINA ===== */
+        .page-hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #132b1e 60%, #1a3d27 100%);
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(46,204,113,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -80px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(46,204,113,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero-inner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero-inner h1 span { color: var(--primary); }
+        .hero-inner p { color: rgba(255,255,255,0.75); font-size: 1.1rem; margin-bottom: 30px; }
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+        .stat-item .label { color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circle-icons {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+        .circle-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px; height: 110px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 0 0 15px rgba(46,204,113,0.15), 0 0 0 30px rgba(46,204,113,0.07);
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 15px rgba(46,204,113,0.15), 0 0 0 30px rgba(46,204,113,0.07); }
+            50% { box-shadow: 0 0 0 20px rgba(46,204,113,0.2), 0 0 0 40px rgba(46,204,113,0.1); }
+        }
+        .orbit-item {
+            position: absolute;
+            width: 60px; height: 60px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(46,204,113,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            backdrop-filter: blur(5px);
+            animation: float 4s ease-in-out infinite;
+        }
+        .orbit-item:nth-child(2)  { top: 0;    left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .orbit-item:nth-child(3)  { top: 20%;  right: 0;  animation-delay: 0.5s; }
+        .orbit-item:nth-child(4)  { bottom: 20%; right: 0; animation-delay: 1s; }
+        .orbit-item:nth-child(5)  { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
+        .orbit-item:nth-child(6)  { bottom: 20%; left: 0; animation-delay: 2s; }
+        .orbit-item:nth-child(7)  { top: 20%; left: 0;   animation-delay: 2.5s; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .orbit-item:nth-child(2), .orbit-item:nth-child(5) { animation: floatX 4s ease-in-out infinite; }
+        @keyframes floatX { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+
+        /* ===== SECÇÃO POR QUÊ RECICLAR ===== */
+        .why-section { padding: 90px 20px; }
+        .why-section h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 15px; color: var(--dark); }
+        .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-top: 40px; }
+        .why-text p { color: var(--text-light); margin-bottom: 18px; font-size: 1.02rem; }
+        .impact-box {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a3d27 100%);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+        }
+        .impact-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px; }
+        .impact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .impact-icon {
+            width: 40px; height: 40px;
+            background: rgba(46,204,113,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .impact-item p { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin: 0; }
+
+        /* ===== OS 6 R'S ===== */
+        .rs-section { background: var(--gray-bg); padding: 90px 20px; }
+        .rs-section h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; color: var(--dark); }
+        .rs-section > .container > p { color: var(--text-light); margin-bottom: 50px; }
+        .rs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .rs-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .rs-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+        }
+        .rs-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: transparent; }
+        .rs-card:hover::before { transform: scaleX(1); }
+        .rs-card .r-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(46,204,113,0.12);
+            position: absolute;
+            top: 10px; right: 20px;
+            line-height: 1;
+        }
+        .rs-icon {
+            width: 65px; height: 65px;
+            background: #f0fdf4;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.6rem;
+            color: var(--primary);
+            transition: background 0.3s;
+        }
+        .rs-card:hover .rs-icon { background: var(--primary); color: white; }
+        .rs-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+        .rs-card p { color: var(--text-light); font-size: 0.9rem; }
+
+        /* ===== TIPOS DE MATERIAL ===== */
+        .materials-section { padding: 90px 20px; }
+        .materials-section h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; color: var(--dark); }
+        .materials-section > .container > p { color: var(--text-light); margin-bottom: 50px; }
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .mat-card {
+            border-radius: 18px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            background: white;
+            cursor: default;
+        }
+        .mat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0,0,0,0.08); }
+        .mat-icon {
+            width: 58px; height: 58px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+        .mat-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; color: var(--dark); }
+        .mat-card p { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+        .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 10px; }
+
+        /* cores dos materiais */
+        .mat-papel    .mat-icon { background: #eff6ff; color: #3b82f6; }
+        .mat-papel    .tag      { background: #eff6ff; color: #3b82f6; }
+        .mat-plastico .mat-icon { background: #fef3c7; color: #f59e0b; }
+        .mat-plastico .tag      { background: #fef3c7; color: #f59e0b; }
+        .mat-vidro    .mat-icon { background: #ecfdf5; color: var(--primary); }
+        .mat-vidro    .tag      { background: #ecfdf5; color: var(--primary); }
+        .mat-metal    .mat-icon { background: #f1f5f9; color: #475569; }
+        .mat-metal    .tag      { background: #f1f5f9; color: #475569; }
+        .mat-elet     .mat-icon { background: #fdf4ff; color: #a855f7; }
+        .mat-elet     .tag      { background: #fdf4ff; color: #a855f7; }
+        .mat-pilhas   .mat-icon { background: #fff7ed; color: #f97316; }
+        .mat-pilhas   .tag      { background: #fff7ed; color: #f97316; }
+        .mat-oleo     .mat-icon { background: #fefce8; color: #ca8a04; }
+        .mat-oleo     .tag      { background: #fefce8; color: #ca8a04; }
+        .mat-organico .mat-icon { background: #f0fdf4; color: #16a34a; }
+        .mat-organico .tag      { background: #f0fdf4; color: #16a34a; }
+
+        /* ===== PASSO A PASSO ===== */
+        .steps-section { background: var(--gray-bg); padding: 90px 20px; }
+        .steps-section h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; color: var(--dark); }
+        .steps-section > .container > p { color: var(--text-light); margin-bottom: 50px; }
+        .steps-timeline {
+            position: relative;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .steps-timeline::before {
+            content: '';
+            position: absolute;
+            left: 38px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), rgba(46,204,113,0.1));
+        }
+        .step-row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 35px;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s ease forwards;
+        }
+        .step-row:nth-child(1) { animation-delay: 0.1s; }
+        .step-row:nth-child(2) { animation-delay: 0.25s; }
+        .step-row:nth-child(3) { animation-delay: 0.4s; }
+        .step-row:nth-child(4) { animation-delay: 0.55s; }
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+        .step-badge {
+            width: 78px; height: 78px;
+            background: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 0 6px var(--gray-bg);
+        }
+        .step-badge span { font-size: 0.65rem; color: var(--primary); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .step-badge strong { font-size: 1.6rem; color: white; font-family: 'Playfair Display', serif; line-height: 1; }
+        .step-content {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 25px 30px;
+            border: 1px solid var(--border);
+            margin-top: 10px;
+        }
+        .step-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+        .step-content p { color: var(--text-light); font-size: 0.95rem; }
+        .step-content .tip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            background: #f0fdf4;
+            color: var(--primary-hover);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        /* ===== CTA FINAL ===== */
+        .cta-section {
+            padding: 90px 20px;
+            background: linear-gradient(135deg, var(--dark), #1a3d27);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(46,204,113,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .cta-section h2 span { color: var(--primary); }
+        .cta-section p { color: rgba(255,255,255,0.7); font-size: 1.05rem; margin-bottom: 35px; position: relative; }
+        .cta-btns { display: flex; gap: 15px; justify-content: center; position: relative; }
+        .btn-outline-white {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+        }
+        footer .container {
+            text-align: center;
+            padding: 40px 0;
+        }
+        footer p { color: var(--text-light); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual { display: none; }
+            .hero-stats { justify-content: center; }
+            .why-grid { grid-template-columns: 1fr; }
+            .rs-grid { grid-template-columns: repeat(2, 1fr); }
+            .materials-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 600px) {
+            .hero-inner h1 { font-size: 2.4rem; }
+            .rs-grid { grid-template-columns: 1fr; }
+            .materials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header id="navbar">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1 style="color: var(--primary); font-size: 1.5rem; cursor: pointer;">EcoRoute</h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="index.html#locais">Pontos de Coleta</a></li>
+                <li><a href="index.html#mapa-section">Mapa</a></li>
+                <li><a href="tipos.html">Tipos de Lixo</a></li>
+                <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
+            </ul>
+            <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="page-hero">
+        <div class="hero-inner">
+            <div>
+                <span class="sub-title" style="color: var(--primary);">GUIA COMPLETO</span>
+                <h1>Reciclar é<br><span>transformar</span><br>o futuro</h1>
+                <p>Aprenda como descartar corretamente cada tipo de material e faça a diferença para Taubaté e para o planeta.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="num">65%</span>
+                        <span class="label">do lixo é<br>reciclável</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num">4x</span>
+                        <span class="label">menos energia<br>reciclando</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num">100</span>
+                        <span class="label">anos leva o<br>plástico no solo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="circle-icons">
+                    <div class="circle-center"><i class="fas fa-recycle"></i></div>
+                    <div class="orbit-item"><i class="fas fa-newspaper"></i></div>
+                    <div class="orbit-item"><i class="fas fa-wine-bottle"></i></div>
+                    <div class="orbit-item"><i class="fas fa-box"></i></div>
+                    <div class="orbit-item"><i class="fas fa-leaf"></i></div>
+                    <div class="orbit-item"><i class="fas fa-laptop"></i></div>
+                    <div class="orbit-item"><i class="fas fa-battery-full"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== POR QUÊ RECICLAR ===== -->
+    <section class="why-section">
+        <div class="container">
+            <span class="sub-title">CONSCIENTIZAÇÃO</span>
+            <h2>Por que Reciclar?</h2>
+            <div class="why-grid">
+                <div class="why-text">
+                    <p>A reciclagem transforma materiais descartados em novas matérias-primas, reduzindo a necessidade de extrair recursos naturais como madeira, minério e petróleo. É um pilar essencial da economia circular.</p>
+                    <p>Ao reciclar, você economiza energia, protege os recursos hídricos e contribui para que aterros sanitários durem muito mais tempo — beneficiando diretamente a qualidade de vida em Taubaté.</p>
+                    <p>Pequenas atitudes cotidianas geram impacto enorme quando multiplicadas por toda a população. Cada item descartado corretamente conta.</p>
+                </div>
+                <div class="impact-box">
+                    <h3><i class="fas fa-globe-americas" style="color: var(--primary); margin-right: 10px;"></i>Impacto Real</h3>
+                    <div class="impact-item">
+                        <div class="impact-icon"><i class="fas fa-thermometer-half"></i></div>
+                        <p>Reduz as emissões de gases de efeito estufa, contribuindo diretamente para a desaceleração do aquecimento global.</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-icon"><i class="fas fa-fish"></i></div>
+                        <p>Diminui a quantidade de plástico que chega aos rios e oceanos, protegendo a fauna aquática.</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-icon"><i class="fas fa-tree"></i></div>
+                        <p>Preserva a biodiversidade ao reduzir o desmatamento causado pela extração de novas matérias-primas.</p>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-icon"><i class="fas fa-bolt"></i></div>
+                        <p>Reciclar alumínio gasta até 95% menos energia do que produzir alumínio a partir do minério bruto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OS 6 R'S ===== -->
+    <section class="rs-section">
+        <div class="container">
+            <span class="sub-title">ESTRATÉGIA</span>
+            <h2>Os 6 R's da Sustentabilidade</h2>
+            <p>A reciclagem é o último recurso. Antes dela, existem outras formas de agir:</p>
+            <div class="rs-grid">
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Repensar</h3>
+                    <p>Questione se você realmente precisa comprar. Avalie o ciclo de vida do produto antes de adquiri-lo.</p>
+                </div>
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-hand-paper"></i></div>
+                    <h3>Recusar</h3>
+                    <p>Diga não a sacolas plásticas, canudos e embalagens desnecessárias. Prefira opções sustentáveis.</p>
+                </div>
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <h3>Reduzir</h3>
+                    <p>Consuma apenas o necessário. Menos consumo significa menos resíduo e menos impacto ambiental.</p>
+                </div>
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3>Reutilizar</h3>
+                    <p>Dê novas funções a objetos antes de descartá-los. Um pote de vidro pode virar organizador.</p>
+                </div>
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-wrench"></i></div>
+                    <h3>Reparar</h3>
+                    <p>Conserte antes de jogar fora. Um produto reparado tem vida útil prolongada e gera menos lixo.</p>
+                </div>
+                <div class="rs-card">
+                    <span class="r-num">R</span>
+                    <div class="rs-icon"><i class="fas fa-recycle"></i></div>
+                    <h3>Reciclar</h3>
+                    <p>Quando não houver outra saída, separe o material para que vire matéria-prima novamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIPOS DE MATERIAL ===== -->
+    <section class="materials-section">
+        <div class="container">
+            <span class="sub-title">MATERIAIS</span>
+            <h2>O que pode ser reciclado?</h2>
+            <p style="color: var(--text-light); margin-bottom: 50px;">Conheça cada categoria e saiba onde descartar em Taubaté.</p>
+            <div class="materials-grid">
+
+                <div class="mat-card mat-papel">
+                    <div class="mat-icon"><i class="fas fa-newspaper"></i></div>
+                    <h4>Papel</h4>
+                    <p>Jornais, revistas, caixas, folhas e cadernos. Devem estar secos e limpos.</p>
+                    <span class="tag">Lixo Azul</span>
+                </div>
+
+                <div class="mat-card mat-plastico">
+                    <div class="mat-icon"><i class="fas fa-wine-bottle"></i></div>
+                    <h4>Plástico</h4>
+                    <p>Garrafas PET, potes, sacolas e embalagens. Lave antes de descartar.</p>
+                    <span class="tag">Lixo Amarelo</span>
+                </div>
+
+                <div class="mat-card mat-vidro">
+                    <div class="mat-icon"><i class="fas fa-glass-martini-alt"></i></div>
+                    <h4>Vidro</h4>
+                    <p>Garrafas, potes e frascos. Descarte com cuidado para evitar acidentes.</p>
+                    <span class="tag">Lixo Verde</span>
+                </div>
+
+                <div class="mat-card mat-metal">
+                    <div class="mat-icon"><i class="fas fa-cube"></i></div>
+                    <h4>Metal</h4>
+                    <p>Latas de alumínio, aço, ferragens e tampas metálicas.</p>
+                    <span class="tag">Lixo Vermelho</span>
+                </div>
+
+                <div class="mat-card mat-elet">
+                    <div class="mat-icon"><i class="fas fa-laptop"></i></div>
+                    <h4>Eletrônicos</h4>
+                    <p>Celulares, computadores e eletrodomésticos. Apenas PEVs específicos.</p>
+                    <span class="tag">PEV Especial</span>
+                </div>
+
+                <div class="mat-card mat-pilhas">
+                    <div class="mat-icon"><i class="fas fa-battery-full"></i></div>
+                    <h4>Pilhas e Baterias</h4>
+                    <p>Nunca jogue no lixo comum. Há contaminantes graves. Use os PEVs.</p>
+                    <span class="tag">PEV Especial</span>
+                </div>
+
+                <div class="mat-card mat-oleo">
+                    <div class="mat-icon"><i class="fas fa-tint"></i></div>
+                    <h4>Óleo de Cozinha</h4>
+                    <p>Guarde em garrafas PET fechadas e leve ao ponto de coleta mais próximo.</p>
+                    <span class="tag">PEV Especial</span>
+                </div>
+
+                <div class="mat-card mat-organico">
+                    <div class="mat-icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Orgânico</h4>
+                    <p>Restos de comida e cascas podem virar adubo por meio da compostagem.</p>
+                    <span class="tag">Compostagem</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PASSO A PASSO ===== -->
+    <section class="steps-section">
+        <div class="container">
+            <span class="sub-title">PASSO A PASSO</span>
+            <h2>Como Reciclar Corretamente</h2>
+            <p style="color: var(--text-light); margin-bottom: 50px;">Siga estes passos para garantir que o seu material seja aproveitado de verdade.</p>
+            <div class="steps-timeline">
+
+                <div class="step-row">
+                    <div class="step-badge"><span>Passo</span><strong>1</strong></div>
+                    <div class="step-content">
+                        <h3>Separação Inicial</h3>
+                        <p>Separe o lixo orgânico (restos de comida, cascas) do lixo seco (papel, plástico, vidro e metal). Use recipientes diferentes desde a cozinha para facilitar.</p>
+                        <span class="tip"><i class="fas fa-lightbulb"></i> Dica: etiquete os recipientes com cores da coleta seletiva.</span>
+                    </div>
+                </div>
+
+                <div class="step-row">
+                    <div class="step-badge"><span>Passo</span><strong>2</strong></div>
+                    <div class="step-content">
+                        <h3>Limpeza Rápida</h3>
+                        <p>Passe um pouco de água nas embalagens (potes de iogurte, latas, garrafas) para remover resíduos. Isso evita mau cheiro e não atrai insetos ou animais.</p>
+                        <span class="tip"><i class="fas fa-lightbulb"></i> Dica: não precisa lavar com sabão — só enxaguar já basta.</span>
+                    </div>
+                </div>
+
+                <div class="step-row">
+                    <div class="step-badge"><span>Passo</span><strong>3</strong></div>
+                    <div class="step-content">
+                        <h3>Atenção aos Resíduos Especiais</h3>
+                        <p>Pilhas, baterias, lâmpadas, medicamentos e eletrônicos <strong>não devem ir para o lixo comum</strong>. Eles precisam de PEVs específicos para descarte seguro.</p>
+                        <span class="tip"><i class="fas fa-map-marker-alt"></i> Encontre o PEV mais próximo no nosso <a href="index.html#mapa-section" style="color: var(--primary-hover); text-decoration: none;">mapa interativo</a>.</span>
+                    </div>
+                </div>
+
+                <div class="step-row">
+                    <div class="step-badge"><span>Passo</span><strong>4</strong></div>
+                    <div class="step-content">
+                        <h3>Descarte no Ponto Certo</h3>
+                        <p>Leve seus recicláveis até o PEV mais próximo de casa. Em Taubaté, há pontos estratégicos nos bairros Imaculada, Centro, Cecap e Piratininga.</p>
+                        <span class="tip"><i class="fas fa-clock"></i> Funcionamento geral: Seg–Sáb das 08:00 às 17:00.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA FINAL ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Pronto para <span>agir</span>?</h2>
+            <p>Encontre o ponto de coleta mais próximo de você ou sugira um novo local para o nosso mapa.</p>
+            <div class="cta-btns">
+                <a href="index.html#mapa-section" class="btn-primary" style="font-size: 1rem; padding: 14px 32px;">
+                    <i class="fas fa-map-marked-alt" style="margin-right: 8px;"></i>Ver Mapa de PEVs
+                </a>
+                <a href="tipos.html" class="btn-outline-white">
+                    <i class="fas fa-book-open" style="margin-right: 8px;"></i>Tipos de Lixo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2026 EcoRoute Taubaté</p>
+        </div>
+    </footer>
+
+</body>
+</html>
