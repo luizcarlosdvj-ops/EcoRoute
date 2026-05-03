@@ -25,6 +25,9 @@
                 <li><a href="tipos.html">Tipos de Lixo</a></li>
                 <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
@@ -72,55 +75,78 @@
                 <!-- Integrante 1 (Você) -->
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Lula</h4>
-                    <p style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">presidente</p>
+                    <h4 style="margin-bottom: 5px;">Luiz Carlos</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 
                 <!-- Outros 7 integrantes (Exemplos) -->
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 2</h4>
+                    <h4 style="margin-bottom: 5px;">Nicolas</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 3</h4>
+                    <h4 style="margin-bottom: 5px;">Jonathan</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 4</h4>
+                    <h4 style="margin-bottom: 5px;">Gabriel</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 5</h4>
+                    <h4 style="margin-bottom: 5px;">Kauê</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 6</h4>
+                    <h4 style="margin-bottom: 5px;">Micael</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 7</h4>
+                    <h4 style="margin-bottom: 5px;">Miguel</h4>
                     <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
                 </div>
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nome 8</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
+                    <h4 style="margin-bottom: 5px;">Gemini e Claude</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedores</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container" style="text-align: center; padding: 40px 0;">
-            <p>© 2026 EcoRoute Taubaté</p>
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-logo"><em>EcoRoute</em></span>
+                <span class="footer-copy">© 2026 EcoRoute Taubaté · Todos os direitos reservados</span>
+                <nav class="footer-links">
+                    <a href="tipos.html">Tipos de Lixo</a>
+                    <a href="TrocaVerde.html">Troca Verde</a>
+                </nav>
+            </div>
         </div>
     </footer>
 
+    <script>
+        (function() {
+            const btn = document.getElementById('hamburger');
+            const nav = document.querySelector('.nav-links');
+            btn.addEventListener('click', function() {
+                nav.classList.toggle('open');
+                btn.classList.toggle('open');
+            });
+            nav.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    nav.classList.remove('open');
+                    btn.classList.remove('open');
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
