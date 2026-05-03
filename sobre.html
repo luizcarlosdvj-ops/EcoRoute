@@ -7,6 +7,58 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Grid Missão / Visão / Valores */
+        .grid-mvv {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Grid Criadores */
+        .grid-criadores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-mvv {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Cards de missão/visão/valores: layout horizontal no mobile */
+            .grid-mvv .location-card {
+                display: flex !important;
+                align-items: center;
+                gap: 20px;
+                text-align: left !important;
+                padding: 22px 24px !important;
+            }
+            .grid-mvv .location-card i {
+                font-size: 1.6rem !important;
+                flex-shrink: 0;
+                margin-bottom: 0 !important;
+            }
+            .grid-mvv .location-card h3 {
+                font-size: 1rem;
+                margin-bottom: 4px !important;
+            }
+
+            /* Criadores: 2 por linha */
+            .grid-criadores {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-mvv .location-card {
+                padding: 18px 16px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -40,7 +92,7 @@
             <p style="color: var(--text-light); font-size: 1.2rem;">O EcoRoute nasceu da vontade de conectar os cidadãos de Taubaté a uma vida mais sustentável, facilitando o acesso à informação e aos pontos de coleta corretos.</p>
         </div>
 
-        <div class="grid-4" style="grid-template-columns: repeat(3, 1fr); gap: 30px;">
+        <div class="grid-mvv">
             <!-- Missão -->
             <div class="location-card" style="cursor: default; padding: 30px; text-align: center;">
                 <i class="fas fa-bullseye" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
@@ -71,7 +123,7 @@
             </div>
 
             <!-- Grade de 4 colunas para os 8 integrantes -->
-            <div class="grid-4" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="grid-criadores">
                 <!-- Integrante 1 (Você) -->
                 <div class="location-card" style="text-align: center;">
                     <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
