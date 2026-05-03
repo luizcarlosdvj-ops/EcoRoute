@@ -325,9 +325,47 @@
         footer .container { text-align: center; }
         footer p { color: var(--text-light); }
 
+        /* ===== HAMBURGER ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1100;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            header#navbar { position: relative; }
             .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: white;
+                padding: 12px 24px 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+                border-top: 1px solid var(--border);
+                z-index: 999;
+            }
+            .nav-links li a { margin: 0; padding: 11px 0; border-bottom: 1px solid var(--border); display: block; }
+            .nav-links li:last-child a { border-bottom: none; }
             .waste-grid { grid-template-columns: 1fr; }
             .filters-bar { top: 56px; }
         }
@@ -364,6 +402,9 @@
                 <li><a href="tipos.html" style="color: var(--primary);">Tipos de Lixo</a></li>
                 <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
@@ -983,7 +1024,14 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
-            <p>© 2026 EcoRoute Taubaté</p>
+            <div class="footer-inner">
+                <span class="footer-logo"><em>EcoRoute</em></span>
+                <span class="footer-copy">© 2026 EcoRoute Taubaté · Todos os direitos reservados</span>
+                <nav class="footer-links">
+                    <a href="sobre.html">Sobre Nós</a>
+                    <a href="TrocaVerde.html">Troca Verde</a>
+                </nav>
+            </div>
         </div>
     </footer>
 
@@ -1032,6 +1080,23 @@
         }
 
         updateCount();
+    </script>
+
+    <script>
+        (function() {
+            const btn = document.getElementById('hamburger');
+            const nav = document.querySelector('.nav-links');
+            btn.addEventListener('click', function() {
+                nav.classList.toggle('open');
+                btn.classList.toggle('open');
+            });
+            nav.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    nav.classList.remove('open');
+                    btn.classList.remove('open');
+                });
+            });
+        })();
     </script>
 
 </body>
