@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 
     <style>
         :root {
@@ -36,7 +38,7 @@
             line-height: 1.6;
         }
 
-        /* --- NAVBAR PADRONIZADA --- */
+        /* --- NAVBAR --- */
         #navbar {
             background: var(--white);
             padding: 1rem 0;
@@ -59,9 +61,7 @@
             gap: 20px;
         }
 
-        .logo a {
-            text-decoration: none;
-        }
+        .logo a { text-decoration: none; }
 
         .nav-links {
             display: flex;
@@ -80,7 +80,6 @@
             white-space: nowrap;
         }
 
-        /* Destaque para a página atual */
         .nav-links li a.active {
             color: var(--primary);
             font-weight: 700;
@@ -124,7 +123,7 @@
             margin-bottom: 20px;
         }
 
-        /* --- BOX DESTAQUE (EQUAÇÃO) --- */
+        /* --- BOX DESTAQUE --- */
         .highlight-box {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -199,7 +198,6 @@
             font-size: 1.3rem;
         }
 
-        /* Tags de Materiais */
         .tag-container {
             display: flex;
             flex-wrap: wrap;
@@ -217,7 +215,6 @@
             border: 1px solid var(--border);
         }
 
-        /* Estilo de Lista no Card */
         .card-list {
             list-style: none;
         }
@@ -231,33 +228,200 @@
             font-weight: 500;
         }
 
-        .card-list li i {
+        .card-list li i { font-size: 1rem; }
+
+        /* --- SEÇÃO MAPA --- */
+        .map-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
             font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .map-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            border: 1px solid var(--border);
+        }
+
+        #mapa-troca-verde {
+            height: 480px;
+            width: 100%;
+        }
+
+        /* Legenda do mapa */
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-sede    { background: #e67e22; }
+        .dot-bairro  { background: #2ecc71; }
+        .dot-expansao{ background: #3498db; }
+
+        /* Popup customizado */
+        .leaflet-popup-content-wrapper {
+            border-radius: 14px !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+        }
+
+        .popup-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .popup-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .badge-sede    { background: #fdebd0; color: #e67e22; }
+        .badge-bairro  { background: #eafaf1; color: #27ae60; }
+        .badge-expansao{ background: #ebf5ff; color: #2980b9; }
+
+        .popup-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.5;
         }
 
         /* --- FOOTER --- */
         footer {
-            background: var(--white);
-            padding: 60px 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
+            background: #0b1c14;
+            padding: 40px 0;
         }
-
-        footer p {
-            color: var(--text-light);
-            font-weight: 500;
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
         }
+        .footer-logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+        }
+        .footer-logo em { font-style: normal; color: var(--primary); }
+        .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.40); }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--primary); }
 
-        /* Responsividade */
+        /* --- HAMBURGER --- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1100;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         @media (max-width: 992px) {
+            .hamburger { display: flex; }
+            #navbar { position: relative; }
             .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: white;
+                padding: 12px 24px 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+                border-top: 1px solid var(--border);
+                z-index: 999;
+            }
+            .nav-links li a { margin: 0; padding: 11px 0; border-bottom: 1px solid var(--border); display: block; }
+            .nav-links li:last-child a { border-bottom: none; }
             .highlight-box h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .page-header { padding: 50px 20px 30px; }
+            .page-header h2 { font-size: 2rem; }
+            .highlight-box h2 { font-size: 1.8rem; }
+            .highlight-box { padding: 40px 20px; }
+            #mapa-troca-verde { height: 360px; }
+            .section-title h3 { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h2 { font-size: 1.6rem; }
+            .grid-cards { grid-template-columns: 1fr; }
+            .card { padding: 28px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar igual ao seu padrão -->
     <header id="navbar">
         <nav class="container">
             <div class="logo">
@@ -273,45 +437,49 @@
                 <li><a href="tipos.html">Tipos de Lixo</a></li>
                 <li><a href="TrocaVerde.html" class="active">Troca Verde</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
 
     <main class="container">
-        
+
         <!-- Header da Página -->
         <div class="page-header">
-            <span class="sub-title">Projeto Social Taubaté</span>
+            <span class="sub-title">Iniciativa do FUSSTA · Taubaté</span>
             <h2>Programa Troca Verde</h2>
             <p style="color: var(--text-light); max-width: 750px; margin: 0 auto; font-size: 1.1rem;">
-                Uma iniciativa do FUSSTA que transforma resíduos recicláveis em alimentos frescos, incentivando a preservação ambiental e a segurança alimentar.
+                Uma iniciativa do Fundo Social de Solidariedade de Taubaté que transforma recicláveis em alimentos. Para cada 1 kg de resíduo entregue, o participante recebe 1 kg de alimento — fortalecendo a segurança alimentar e a consciência ambiental nas comunidades da cidade.
             </p>
         </div>
 
-        <!-- Box de Destaque com a Informação Coletada -->
+        <!-- Box Destaque -->
         <div class="highlight-box">
             <p class="label">A Equação da Sustentabilidade</p>
-            <h2>1kg de Reciclável = 1kg de Alimento</h2>
-            <span class="obs">*Limite máximo de 15kg de materiais por pessoa por visita.</span>
+            <h2>1 kg de Reciclável = 1 kg de Alimento</h2>
+            <span class="obs">*Limite máximo de 15 kg de materiais por pessoa por visita. Aceitamos papel, plástico, vidro e metal.</span>
         </div>
 
-        <!-- Seção de Detalhes em Cards -->
+        <!-- Cards de Detalhes -->
         <div class="grid-cards">
-            
+
             <!-- Card 1: O que levar -->
             <div class="card" style="border-top: 5px solid var(--primary);">
                 <div class="card-header">
                     <i class="fa-solid fa-recycle" style="color: var(--primary); background: #eafaf1;"></i>
                     <span>O que levar?</span>
                 </div>
-                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">Os materiais devem estar obrigatoriamente <strong>limpos e secos</strong>:</p>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">Os materiais devem estar <strong>limpos e secos</strong>. São aceitos:</p>
                 <div class="tag-container">
                     <span class="tag">Garrafas PET</span>
                     <span class="tag">Latinhas</span>
                     <span class="tag">Papelão</span>
                     <span class="tag">Vidros</span>
                     <span class="tag">Óleo de Cozinha</span>
-                    <span class="tag">Plásticos Hard</span>
+                    <span class="tag">Plásticos Rígidos</span>
+                    <span class="tag">Metais</span>
                 </div>
             </div>
 
@@ -321,35 +489,214 @@
                     <i class="fa-solid fa-basket-shopping" style="color: var(--blue); background: #ebf5ff;"></i>
                     <span>O que recebe?</span>
                 </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">Os alimentos são fornecidos por <strong>produtores locais e parceiros</strong>, fortalecendo também a economia regional.</p>
                 <ul class="card-list">
-                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Frutas da Estação</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Legumes e Verduras</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Itens de Cesta Básica</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Frutas e legumes da estação</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Verduras frescas</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Itens de cesta básica (arroz, feijão, óleo)</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--blue);"></i> Mudas de plantas (em edições especiais)</li>
                 </ul>
             </div>
 
             <!-- Card 3: Como participar -->
             <div class="card" style="border-top: 5px solid var(--purple);">
                 <div class="card-header">
-                    <i class="fa-solid fa-location-dot" style="color: var(--purple); background: #f5f3ff;"></i>
+                    <i class="fa-solid fa-route" style="color: var(--purple); background: #f5f3ff;"></i>
                     <span>Como participar?</span>
                 </div>
-                <p style="color: var(--text-light); font-size: 0.95rem;">
-                    O projeto é itinerante e percorre diversos bairros. Os materiais são pesados na hora e a troca pelo kit de alimentos é imediata.
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px;">
+                    O Troca Verde é <strong>itinerante</strong> e percorre diferentes bairros de Taubaté, com foco em comunidades em situação de vulnerabilidade. Basta comparecer ao ponto de coleta com os materiais recicláveis: eles são pesados na hora e a troca por alimentos é imediata. Fique de olho nas próximas edições pelo mapa abaixo!
                 </p>
-                <a href="index.html#mapa-section" style="display: inline-block; margin-top: 20px; color: var(--purple); font-weight: 700; text-decoration: none;">Ver cronograma no mapa →</a>
+                <a href="#mapa-troca-verde-section" style="display: inline-block; margin-top: 8px; color: var(--purple); font-weight: 700; text-decoration: none;">Ver locais no mapa ↓</a>
             </div>
 
         </div>
+
+        <!-- ===== MAPA INTERATIVO ===== -->
+        <section class="map-section" id="mapa-troca-verde-section">
+            <div class="section-title">
+                <h3><i class="fa-solid fa-map-location-dot" style="color: var(--primary); margin-right: 10px;"></i>Onde acontece o Troca Verde?</h3>
+                <p>Veja os bairros já atendidos e em expansão. O programa é itinerante — clique nos marcadores para saber mais sobre cada local.</p>
+            </div>
+
+            <div class="map-wrapper">
+                <div id="mapa-troca-verde"></div>
+            </div>
+
+            <!-- Legenda -->
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-dot dot-sede"></div>
+                    Sede do FUSSTA
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-bairro"></div>
+                    Bairros já atendidos
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-expansao"></div>
+                    Em expansão
+                </div>
+            </div>
+        </section>
 
     </main>
 
     <footer>
         <div class="container">
-            <h2 style="color: var(--primary); font-weight: 800; margin-bottom: 15px;">EcoRoute</h2>
-            <p>© 2026 EcoRoute Taubaté</p>
+            <div class="footer-inner">
+                <span class="footer-logo"><em>EcoRoute</em></span>
+                <span class="footer-copy">© 2026 EcoRoute Taubaté · Todos os direitos reservados</span>
+                <nav class="footer-links">
+                    <a href="sobre.html">Sobre Nós</a>
+                    <a href="tipos.html">Tipos de Lixo</a>
+                    <a href="TrocaVerde.html">Troca Verde</a>
+                </nav>
+            </div>
         </div>
     </footer>
 
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+    <script>
+        // ── Hamburger ──────────────────────────────────────────
+        (function() {
+            const btn = document.getElementById('hamburger');
+            const nav = document.querySelector('.nav-links');
+            btn.addEventListener('click', function() {
+                nav.classList.toggle('open');
+                btn.classList.toggle('open');
+            });
+            nav.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    nav.classList.remove('open');
+                    btn.classList.remove('open');
+                });
+            });
+        })();
+
+        // ── Mapa Leaflet ───────────────────────────────────────
+        (function() {
+            const map = L.map('mapa-troca-verde', {
+                center: [-23.023, -45.555],
+                zoom: 13,
+                scrollWheelZoom: false
+            });
+
+            // Tiles OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // ── Função para criar ícones coloridos ──
+            function makeIcon(color) {
+                return L.divIcon({
+                    className: '',
+                    html: `<div style="
+                        width: 34px; height: 34px;
+                        background: ${color};
+                        border: 3px solid white;
+                        border-radius: 50% 50% 50% 0;
+                        transform: rotate(-45deg);
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                    "></div>`,
+                    iconSize: [34, 34],
+                    iconAnchor: [17, 34],
+                    popupAnchor: [0, -36]
+                });
+            }
+
+            // ── Dados dos pontos ──
+            const pontos = [
+                {
+                    lat: -23.0224478,
+                    lng: -45.5755511,
+                    nome: "FUSSTA – Fundo Social de Solidariedade",
+                    endereco: "Estr. do Pinhão, 243 – Vila Santa Fé",
+                    tipo: "sede",
+                    badge: "Sede Organizadora",
+                    badgeClass: "badge-sede",
+                    desc: "Sede do Fundo Social de Solidariedade de Taubaté, responsável pela coordenação e execução do Programa Troca Verde em toda a cidade."
+                },
+                {
+                    lat: -23.013503,
+                    lng: -45.5158874,
+                    nome: "Chácara Silvestre",
+                    endereco: "Taubaté – SP",
+                    tipo: "bairro",
+                    badge: "Bairro Atendido",
+                    badgeClass: "badge-bairro",
+                    desc: "Bairro onde o Troca Verde foi iniciado. Foi aqui que o programa estreou, servindo de modelo para a expansão itinerante pelo município."
+                },
+                {
+                    lat: -23.0120163,
+                    lng: -45.5641193,
+                    nome: "Vila Aparecida",
+                    endereco: "Taubaté – SP",
+                    tipo: "bairro",
+                    badge: "Bairro Atendido",
+                    badgeClass: "badge-bairro",
+                    desc: "Comunidade atendida pelo programa itinerante, onde moradores trocam recicláveis por alimentos frescos fornecidos por produtores locais."
+                },
+                {
+                    lat: -23.0334148,
+                    lng: -45.5747397,
+                    nome: "Jardim das Nações",
+                    endereco: "Taubaté – SP",
+                    tipo: "expansao",
+                    badge: "Em Expansão",
+                    badgeClass: "badge-expansao",
+                    desc: "Bairro previsto para receber as próximas edições do Troca Verde, ampliando o alcance do programa para mais famílias em situação de vulnerabilidade."
+                },
+                {
+                    lat: -23.0405486,
+                    lng: -45.5782804,
+                    nome: "Parque Residencial Bom Conselho",
+                    endereco: "Taubaté – SP",
+                    tipo: "expansao",
+                    badge: "Em Expansão",
+                    badgeClass: "badge-expansao",
+                    desc: "Área em processo de integração ao cronograma itinerante do Troca Verde, com previsão de receber o programa em breve."
+                },
+                {
+                    lat: -23.005536186175984,
+                    lng: -45.53059965429168,
+                    nome: "Praça da Rua Pedrinho, Gurilândia",
+                    endereco: "Taubaté – SP",
+                    tipo: "bairro",
+                    badge: "Bairro Atendido",
+                    badgeClass: "badge-bairro",
+                    desc: "Comunidade atendida pelo programa itinerante, onde moradores trocam recicláveis por alimentos frescos fornecidos por produtores locais."
+                },
+            ];
+
+             
+            const cores = {
+                sede: '#e67e22',
+                bairro: '#2ecc71',
+                expansao: '#3498db'
+            };
+
+            pontos.forEach(function(p) {
+                const marker = L.marker([p.lat, p.lng], { icon: makeIcon(cores[p.tipo]) }).addTo(map);
+                marker.bindPopup(`
+                    <div style="min-width: 220px; padding: 4px;">
+                        <div class="popup-title">${p.nome}</div>
+                        <span class="popup-badge ${p.badgeClass}">${p.badge}</span>
+                        <div class="popup-desc">
+                            <div style="margin-bottom: 6px;"><i class="fa-solid fa-location-dot" style="margin-right:5px; color: #aaa;"></i>${p.endereco}</div>
+                            ${p.desc}
+                        </div>
+                    </div>
+                `, { maxWidth: 280 });
+            });
+
+            // Ativa zoom no scroll apenas quando o mapa está em foco
+            map.on('focus', function() { map.scrollWheelZoom.enable(); });
+            map.on('blur',  function() { map.scrollWheelZoom.disable(); });
+        })();
+    </script>
 </body>
 </html>
