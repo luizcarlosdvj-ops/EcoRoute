@@ -425,18 +425,30 @@
         }
         .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--white);
-            border-top: 1px solid var(--border);
-        }
-        footer .container {
-            text-align: center;
-            padding: 40px 0;
-        }
-        footer p { color: var(--text-light); }
-
         /* ===== RESPONSIVE ===== */
+        /* ===== HAMBURGER ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1100;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         @media (max-width: 900px) {
             .hero-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-visual { display: none; }
@@ -444,7 +456,22 @@
             .why-grid { grid-template-columns: 1fr; }
             .rs-grid { grid-template-columns: repeat(2, 1fr); }
             .materials-grid { grid-template-columns: repeat(2, 1fr); }
+            .hamburger { display: flex; }
+            header#navbar { position: relative; }
             .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: white;
+                padding: 12px 24px 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+                border-top: 1px solid var(--border);
+                z-index: 999;
+            }
+            .nav-links li a { margin: 0; padding: 11px 0; border-bottom: 1px solid var(--border); display: block; }
+            .nav-links li:last-child a { border-bottom: none; }
         }
         @media (max-width: 600px) {
             .hero-inner h1 { font-size: 2.4rem; }
@@ -471,6 +498,9 @@
                 <li><a href="tipos.html">Tipos de Lixo</a></li>
                 <li><a href="TrocaVerde.html" style="color: var(--primary);">Troca Verde</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
             <a href="index.html#empresas" class="btn-primary">Seja Parceiro</a>
         </nav>
     </header>
@@ -682,7 +712,7 @@
                     <div class="step-content">
                         <h3>Limpeza Rápida</h3>
                         <p>Passe um pouco de água nas embalagens (potes de iogurte, latas, garrafas) para remover resíduos. Isso evita mau cheiro e não atrai insetos ou animais.</p>
-                        <span class="tip"><i class="fas fa-lightbulb"></i> Dica: não precisa lavar com sabão — só enxaguar já basta.</span>
+                        <span class="tip"><i class="fas fa-lightbulb"></i> Dica: não precisa lavar com sabão, só enxaguar já basta.</span>
                     </div>
                 </div>
 
@@ -691,7 +721,7 @@
                     <div class="step-content">
                         <h3>Atenção aos Resíduos Especiais</h3>
                         <p>Pilhas, baterias, lâmpadas, medicamentos e eletrônicos <strong>não devem ir para o lixo comum</strong>. Eles precisam de PEVs específicos para descarte seguro.</p>
-                        <span class="tip"><i class="fas fa-map-marker-alt"></i> Encontre o PEV mais próximo no nosso <a href="index.html#mapa-section" style="color: var(--primary-hover); text-decoration: none;">mapa interativo</a>.</span>
+                        <span class="tip"><i class="fas fa-map-marker-alt"></i> Encontre o PEV mais próximo no nosso:<a href="index.html#mapa-section" style="color: var(--primary-hover); text-decoration: none;">Mapa Interativo.</a></span>
                     </div>
                 </div>
 
@@ -725,11 +755,34 @@
     </section>
 
     <!-- ===== FOOTER ===== -->
-    <footer>
+     <footer>
         <div class="container">
-            <p>© 2026 EcoRoute Taubaté</p>
+            <div class="footer-inner">
+                <span class="footer-logo"><em>EcoRoute</em></span>
+                <span class="footer-copy">© 2026 EcoRoute Taubaté · Todos os direitos reservados</span>
+                <nav class="footer-links">
+                    <a href="sobre.html">Sobre Nós</a>
+                    <a href="TrocaVerde.html">Troca Verde</a>
+                </nav>
+            </div>
         </div>
     </footer>
 
+    <script>
+        (function() {
+            const btn = document.getElementById('hamburger');
+            const nav = document.querySelector('.nav-links');
+            btn.addEventListener('click', function() {
+                nav.classList.toggle('open');
+                btn.classList.toggle('open');
+            });
+            nav.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    nav.classList.remove('open');
+                    btn.classList.remove('open');
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
