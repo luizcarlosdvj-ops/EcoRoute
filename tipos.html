@@ -162,6 +162,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 22px;
+            align-items: start;
         }
 
         /* Card principal */
@@ -412,7 +413,7 @@
     <!-- ===== HERO ===== -->
     <section class="page-hero">
         <div class="hero-content">
-            <span class="sub-title">GUIA COMPLETO DE DESCARTE</span>
+            <span class="sub-title"> GUIA COMPLETO DE DESCARTE</span>
             <h1>Cada resíduo tem<br>um <em>destino certo</em></h1>
             <p>Saiba como separar, preparar e descartar cada tipo de lixo para garantir que seja aproveitado corretamente.</p>
             <div class="search-wrap">
@@ -956,7 +957,7 @@
     <!-- ===== GUIA DE CORES DE LIXO ===== -->
     <section class="color-guide">
         <div class="container">
-            <span class="sub-title" style="text-align:center; display:block; color:var(--primary);">REFERÊNCIA RÁPIDA</span>
+            <span class="sub-title" style="text-align:center; display:block; color:var(--primary);"> REFERÊNCIA RÁPIDA</span>
             <h2>Cores das Lixeiras</h2>
             <p>No Brasil, as lixeiras de coleta seletiva seguem um padrão de cores definido por lei.</p>
             <div class="bins-grid">
@@ -1007,7 +1008,7 @@
     <!-- ===== CTA ===== -->
     <section class="cta-strip">
         <div class="container">
-            <span class="sub-title">PRÓXIMO PASSO</span>
+            <span class="sub-title"> PRÓXIMO PASSO</span>
             <h2>Onde descartar em Taubaté?</h2>
             <p>Agora que você sabe separar, encontre o ponto de coleta mais próximo da sua casa.</p>
             <div class="cta-btns">
@@ -1039,7 +1040,13 @@
     <script>
         // Toggle cards ao clicar
         function toggleCard(el) {
-            el.classList.toggle('open');
+            const isOpen = el.classList.contains('open');
+            document.querySelectorAll('.waste-card.open').forEach(card => {
+                card.classList.remove('open');
+            });
+            if (!isOpen) {
+                el.classList.add('open');
+            }
         }
 
         // Busca
