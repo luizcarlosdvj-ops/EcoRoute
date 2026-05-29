@@ -70,7 +70,7 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="sobre.html" style="color: var(--primary);">Sobre Nós</a></li>
                 <li><a href="index.html#locais">Pontos de Coleta</a></li>
                 <li><a href="index.html#mapa-section">Mapa</a></li>
@@ -116,58 +116,89 @@
 
     <!-- Seção de Criadores -->
     <section style="background: var(--gray-bg); padding: 80px 20px;">
-        <div class="container">
+        <class="container">
             <div style="text-align: center; margin-bottom: 50px;">
                 <span class="sub-title">Quem Faz Acontecer</span>
                 <h2>Os Criadores</h2>
             </div>
 
-            <!-- Grade de 4 colunas para os 8 integrantes -->
-            <div class="grid-criadores">
-                <!-- Integrante 1 (Você) -->
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Luiz Carlos</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                
-                <!-- Outros 7 integrantes (Exemplos) -->
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Nicolas</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Jonathan</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Gabriel</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Kauê</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Micael</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Miguel</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-                <div class="location-card" style="text-align: center; padding-top: 35px;">
-                    <div style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto 15px;"></div>
-                    <h4 style="margin-bottom: 5px;">Pessoa 8</h4>
-                    <p style="font-size: 0.8rem; color: var(--text-light);">Desenvolvedor</p>
-                </div>
-            </div>
+            <style>
+.criadores-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:700px){.criadores-grid{grid-template-columns:repeat(2,1fr);}}
+.creator-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.08);
+  border-radius:12px;
+  padding:28px 16px 22px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(24px);
+  transition:transform 0.28s ease,box-shadow 0.28s ease;
+  animation:fadeUpCard 0.5s ease forwards;
+}
+.creator-card:hover{transform:translateY(-6px);box-shadow:0 8px 28px rgba(0,0,0,0.10);}
+.creator-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);border-radius:12px 12px 0 0;}
+.creator-card:nth-child(1){--accent:#22c55e;animation-delay:0.05s;}
+.creator-card:nth-child(2){--accent:#3b82f6;animation-delay:0.10s;}
+.creator-card:nth-child(3){--accent:#f97316;animation-delay:0.15s;}
+.creator-card:nth-child(4){--accent:#a855f7;animation-delay:0.20s;}
+.creator-card:nth-child(5){--accent:#06b6d4;animation-delay:0.25s;}
+.creator-card:nth-child(6){--accent:#eab308;animation-delay:0.30s;}
+.creator-card:nth-child(7){--accent:#ec4899;animation-delay:0.35s;}
+.creator-avatar{
+  width:60px;height:60px;border-radius:50%;
+  margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  color:var(--accent);
+  border:2px solid color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.creator-name{font-size:15px;font-weight:600;margin-bottom:5px;}
+.creator-role{font-size:12px;color:var(--text-light);display:flex;align-items:center;justify-content:center;gap:5px;}
+@keyframes fadeUpCard{to{opacity:1;transform:translateY(0);}}
+</style>
+
+<div class="criadores-grid">
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Luiz Carlos</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Nicolas</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Jonathan</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Gabriel</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Kauê</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Micael</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+  <div class="creator-card">
+    <div class="creator-avatar"><i class="fas fa-code"></i></div>
+    <h4 class="creator-name">Miguel</h4>
+    <p class="creator-role"><i class="fas fa-terminal"></i> Desenvolvedor</p>
+  </div>
+</div>
+            
         </div>
     </section>
 
